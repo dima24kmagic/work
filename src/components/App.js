@@ -25,18 +25,7 @@ class App extends Component {
     this.state = {
       test: 'wasup!'
     }
-    this.store = this.props.store;
-    this.setState({
-    });
-  }
-  handleVoteAngular = () => {
-    this.store.dispatch(voteAngular());
-  }
-  handleVoteReact = () => {
-    this.store.dispatch(voteReact());
-  }
-  handleVoteVuejs = () => {
-    this.store.dispatch(voteVuejs());
+    this.store = this.props.route.store;
   }
   render() {
     console.log(this.store);
