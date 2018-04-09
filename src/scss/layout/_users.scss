@@ -1,0 +1,22 @@
+.users{
+  @include flexcenter-horizont;
+  font-size: 10rem;
+  &__form{
+  }
+  .group{
+    &__item{
+      display: block;
+      &:focus + &__label{
+        transform: translateY(0%);
+        opacity: 1;
+      }
+      &__label{
+        transition: opacity .25s, transform .25s;
+        display: block;
+        margin-bottom: 2rem;
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+    }
+  }
+}

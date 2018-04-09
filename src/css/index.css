@@ -13,6 +13,23 @@ body {
   display: flex;
   justify-content: center; }
 
+.users {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10rem; }
+  .users .group__item {
+    display: block; }
+    .users .group__item:focus + .users .group__item__label {
+      transform: translateY(0%);
+      opacity: 1; }
+    .users .group__item__label {
+      transition: opacity .25s, transform .25s;
+      display: block;
+      margin-bottom: 2rem;
+      transform: translateY(-100%);
+      opacity: 0; }
+
 .header {
   display: flex;
   justify-content: center;
