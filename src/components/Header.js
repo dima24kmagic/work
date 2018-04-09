@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
+import {switchPage} from '../action/actions';
 class Header extends Component {
+  test = (e) => {
+    e.preventDefault();
+    console.log(111);
+    this.props.store.dispatch({type: "SWITCH_PAGE", page: "/contacts"})
+  }
   render(){
     return(
         <div className="header">

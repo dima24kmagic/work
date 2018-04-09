@@ -7,6 +7,8 @@ import {
   Route
 } from 'react-router-dom';
 
+//Actions
+import { voteAngular, voteReact, voteVuejs } from '../action/actions';
 //Style
 import '../css/index.css';
 
@@ -18,11 +20,30 @@ import Company from './Company';
 
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      test: 'wasup!'
+    }
+    this.store = this.props.store;
+    this.setState({
+    });
+  }
+  handleVoteAngular = () => {
+    this.store.dispatch(voteAngular());
+  }
+  handleVoteReact = () => {
+    this.store.dispatch(voteReact());
+  }
+  handleVoteVuejs = () => {
+    this.store.dispatch(voteVuejs());
+  }
   render() {
+    console.log(this.store);
     return (
       <BrowserRouter>
           <div className="app">
-            <Header />
+            <Header store={this.store}/>
             <Route exact path="/" component={Home}/>
             <Route exact path="/users" component={Users}/>
             <Route exact path="/company" component={Company}/>
