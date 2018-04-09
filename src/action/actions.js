@@ -1,11 +1,5 @@
-{
-  type: 'CHANGE_PATH',
-  payload: { path: "/"}
-}
-
-switchPage(data){
-  return{
-    type: 'CHANGE_PATH',
-    path: "/" + data;
-  }
+export const switchPage = () => {
+  return(
+    type: 'SWITCH_PAGE'
+  )
 }
