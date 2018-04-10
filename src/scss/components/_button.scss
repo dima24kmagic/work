@@ -1,0 +1,36 @@
+.btn{
+  display: inline-block;
+  transition: all .15s;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 100rem;
+  padding:.5rem 3rem;
+  font-size: 3rem;
+  cursor: pointer;
+  position: relative;
+  &--green{
+    background: rgb(0, 199, 97);
+    color: rgba(255, 255, 255, 0.75);
+    &:hover{
+      color: rgb(255, 255, 255);
+      box-shadow: 0 .25rem 1rem $shadow3;
+      transform: translateY(-.5rem);
+      &::after{
+        transform: scale(1.2, 1.5);
+        opacity: 0;
+      }
+    }
+    &::after{
+      transition: all .15s;
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      border-radius: 100rem;
+      background: rgb(0, 199, 97);
+    }
+  }
+}

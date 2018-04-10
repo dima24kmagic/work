@@ -17,6 +17,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   font-size: 10rem; }
   .users .group__item {
     display: block; }
@@ -53,5 +54,59 @@ body {
       color: white; }
     .header__link:not(:last-child) {
       margin-right: 2.5rem; }
+
+.users .btn {
+  margin-top: 2rem; }
+.users__body {
+  margin-bottom: .5rem; }
+.users__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 30rem; }
+  .users__info__header {
+    display: flex;
+    align-items: center; }
+  .users__info__name {
+    font-size: 6rem; }
+    .users__info__name h2 {
+      font-weight: 100; }
+  .users__info__gender {
+    font-size: 2rem;
+    color: #8f8f8f;
+    margin-left: 1rem;
+    align-self: flex-center; }
+
+.btn {
+  display: inline-block;
+  transition: all .15s;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 100rem;
+  padding: .5rem 3rem;
+  font-size: 3rem;
+  cursor: pointer;
+  position: relative; }
+  .btn--green {
+    background: #00c761;
+    color: rgba(255, 255, 255, 0.75); }
+    .btn--green:hover {
+      color: white;
+      box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.3);
+      transform: translateY(-0.5rem); }
+      .btn--green:hover::after {
+        transform: scale(1.2, 1.5);
+        opacity: 0; }
+    .btn--green::after {
+      transition: all .15s;
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      border-radius: 100rem;
+      background: #00c761; }
 
 /*# sourceMappingURL=index.css.map */

@@ -1,15 +1,5 @@
-export const voteAngular = () => {
+export const addUser = (data) => {
   return {
-    type: 'VOTE_ANGULAR'
-  }
-}
-export const voteReact = () => {
-  return {
-    type: 'VOTE_REACT'
-  }
-}
-export const voteVuejs = () => {
-  return {
-    type: 'VOTE_VUEJS'
-  }
+    type: 'ADD_USER',
+    data: data}
 }

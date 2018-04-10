@@ -1,0 +1,33 @@
+.users{
+  .btn{
+    margin-top: 2rem;
+  }
+  &__user{
+  }
+  &__body{
+    margin-bottom: .5rem;
+  }
+  &__info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // background: rgb(14, 186, 139);
+    width: 30rem;
+    &__header{
+      display: flex;
+      align-items: center;
+    }
+    &__name{
+      font-size: 6rem;
+      h2{
+        font-weight: 100;
+      }
+    }
+    &__gender{
+      font-size: 2rem;
+      color: rgb(143, 143, 143);
+      margin-left: 1rem;
+      align-self: flex-center;
+    }
+  }
+}
