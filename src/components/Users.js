@@ -1,20 +1,29 @@
 import React, {Component} from 'react';
 import {Route, Link} from 'react-router-dom';
+import {editUser} from '../action/actions'
 //components
 class Users extends Component{
+  testEdit = (index) => {
+    this.props.store.dispatch(editUser(index));
+    console.log(this.props.store.getState(), index);
+  }
   render(){
     return(
       <div className="users">
         {this.props.store.getState().userReducer.users.map((user, index) => {
           return(
             <div className="user" key={index}>
+              <div className='change' onClick={()=>this.testEdit(index)}></div>
               <div className="user__info">
                 <div className="user__info__img"></div>
 
                 <div className='user__body'>
 
                   <div className="user__body__header">
-                    <div className="user__body__header__name"><h2>{user.name}</h2></div>
+                    {user.isEditing
+                    ? <div className="user__body__header__name"><input type='text' value={user.name} /> </div>
+                    : <div className="user__body__header__name"><h2>{user.name}</h2></div>}
+
                     <div className="user__body__header__gender">{user.gender ? 'Male' : 'Female'}</div>
                   </div>
 

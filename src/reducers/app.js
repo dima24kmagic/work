@@ -6,7 +6,8 @@ let initialState = {
     age: 18,
     education: 'College',
     job: 'Schooler',
-    havekids: false
+    havekids: false,
+    isEditing: false
   },
   {
     name: "Dima",
@@ -14,7 +15,8 @@ let initialState = {
     age: 18,
     job: 'Schooler',
     education: 'Elementary School',
-    havekids: false
+    havekids: false,
+    isEditing: false
   }
   ]
 }
@@ -24,8 +26,9 @@ const users = (state = initialState, action) => {
     case 'ADD_USER':
       let newUser = Object.assign({}, action.data);
       return Object.assign({}, state, state.users.push(newUser))
-    case 'TEST':
-      console.log('Hell yeah, test work!')
+    case 'EDIT_USER':
+      console.log('u changign useredit?');
+      return Object.assign({}, state, state.users[action.data].isEditing = !state.users.isEditing)
     default:
       return state
   }

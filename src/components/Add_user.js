@@ -12,6 +12,7 @@ class Add_user extends Component {
       "havekids": true
     }
   }
+
   getInput = (e, stateField) => {
     this.setState({
       [stateField]: e.target.value

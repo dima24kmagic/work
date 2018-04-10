@@ -100,6 +100,7 @@ body {
       margin-right: 2.5rem; }
 
 .users .user {
+  position: relative;
   transition: transform .25s, box-shadow .25s;
   padding: 1rem 1rem;
   width: 60rem;
@@ -107,8 +108,16 @@ body {
   border-radius: 4px;
   height: auto;
   margin-bottom: 2rem; }
+  .users .user .change {
+    width: 4rem;
+    height: 4rem;
+    background: #34bfa0;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer; }
   .users .user:hover {
-    transform: scale(1.05);
+    transform: scale(1.01);
     box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2); }
   .users .user__body {
     width: 100%; }

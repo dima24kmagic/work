@@ -1,5 +1,15 @@
 .users{
   .user{
+    position: relative;
+    .change{
+      width: 4rem;
+      height: 4rem;
+      background: rgb(52, 191, 160);
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      cursor: pointer;
+    }
     transition: transform .25s, box-shadow .25s;
     padding: 1rem 1rem;
     width: 60rem;
@@ -9,7 +19,7 @@
     height: auto;
     margin-bottom: 2rem;
     &:hover{
-      transform: scale(1.05);
+      transform: scale(1.01);
       box-shadow: 0 1.5rem 4rem $shadow2;
     }
     &__body{
