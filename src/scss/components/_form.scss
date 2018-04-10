@@ -1,4 +1,9 @@
 .users__form{
+  form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
   .group{
     font-size: 2rem;
     display: flex;

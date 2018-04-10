@@ -99,27 +99,36 @@ body {
     .header__link:not(:last-child) {
       margin-right: 2.5rem; }
 
-.users .btn {
-  margin-top: 2rem; }
-.users__body {
-  margin-bottom: .5rem; }
-.users__info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 30rem; }
-  .users__info__header {
-    display: flex;
-    align-items: center; }
-  .users__info__name {
-    font-size: 6rem; }
-    .users__info__name h2 {
-      font-weight: 100; }
-  .users__info__gender {
-    font-size: 2rem;
-    color: #8f8f8f;
-    margin-left: 1rem;
-    align-self: flex-center; }
+.users .user {
+  transition: transform .25s, box-shadow .25s;
+  padding: 1rem 1rem;
+  width: 60rem;
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  height: auto;
+  margin-bottom: 2rem; }
+  .users .user:hover {
+    transform: scale(1.05);
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2); }
+  .users .user__body {
+    width: 100%; }
+    .users .user__body__header {
+      width: 100%;
+      display: flex;
+      margin-left: 1rem;
+      align-items: center; }
+      .users .user__body__header__gender {
+        margin-left: .25rem;
+        align-self: flex-start; }
+    .users .user__body__main {
+      font-size: 2.5rem;
+      margin-left: 2rem; }
+  .users .user__info {
+    display: flex; }
+    .users .user__info__img {
+      width: 15rem;
+      height: 12.5rem;
+      background: #ad88c6; }
 
 .btn {
   display: inline-block;
@@ -153,6 +162,10 @@ body {
       border-radius: 100rem;
       background: #00c761; }
 
+.users__form form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
 .users__form .group {
   font-size: 2rem;
   display: flex;

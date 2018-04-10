@@ -7,18 +7,27 @@ class Users extends Component{
       <div className="users">
         {this.props.store.getState().userReducer.users.map((user, index) => {
           return(
-            <div className="users__user" key={index}>
-              <div className="users__info">
-                <div className="users__info__header">
-                  <div className="users__info__name"><h2>{user.name}</h2></div>
-                  <div className="users__info__gender">{user.gender ? 'Male' : 'Female'}</div>
+            <div className="user" key={index}>
+              <div className="user__info">
+                <div className="user__info__img"></div>
+
+                <div className='user__body'>
+
+                  <div className="user__body__header">
+                    <div className="user__body__header__name"><h2>{user.name}</h2></div>
+                    <div className="user__body__header__gender">{user.gender ? 'Male' : 'Female'}</div>
+                  </div>
+
+                  <div className="user__body__main">
+                    <div className="user__body__info user__info__age">Age: {user.age}</div>
+                    <div className="user__body__info user__info__job">Job: {user.job}</div>
+                    <div className="user__body__info user__info__education">Education: {user.education}</div>
+                    <div className="user__body__info user__info__kids">{user.havekids ? 'Have Kids' : 'Free'}</div>
+                  </div>
+
                 </div>
-                <div className="users__info__body">
-                  <div className="users__body__info users__info__age">Age: {user.age}</div>
-                  <div className="users__body__info users__info__job">Job: {user.job}</div>
-                  <div className="users__body__info users__info__education">Education: {user.education}</div>
-                  <div className="users__body__info users__info__kids">{user.havekids ? 'Have Kids' : 'Free'}</div>
-                </div>
+
+
               </div>
             </div>
           )

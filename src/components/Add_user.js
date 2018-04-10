@@ -47,6 +47,7 @@ class Add_user extends Component {
             <input className="group__item group__checkbox__item" type="radio" value='false' id="female" name='gender'/>
             <label className="group__item__label group__checkbox__label" htmlFor="female"><span className='outter-circle'><span className='inner-circle'></span></span><p>Female</p></label>
           </div>
+          {/* WTF IS GOING ON WITH THE FUCKING NUMBER TYPE INPUT, STUPID ASS MUHFUCKAS DID SMTHNG WRONG AND NOW I CAN'T FIGURE OUT TF IS GOING ON!!!!! */}
           <div className="group">
             <input number="2"  className="group__item" type="number" id="age" placeholder="Age" name="age" onClick={(e) => console.log(e.target.value)}/>
             <label className="group__item__label" htmlFor="age">Age</label>
