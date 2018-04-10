@@ -1,0 +1,93 @@
+.users__form{
+  .group{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 1.5rem;
+    &__item{
+      &:focus{
+        outline: none;
+        border-bottom: 4px solid rgb(0, 231, 113);
+        &::placeholder{
+          color: transparent;
+        }
+      }
+      &:invalid{
+        border-bottom: 4px solid rgb(255, 99, 0);
+      }
+      &:focus + *{
+        transform: translateY(0%);
+        opacity: 1;
+      }
+      &:invalid + *{
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      border-radius: 4px;
+      border: 2px solid rgba(176, 176, 176, 1);
+      border-bottom: 4px solid rgba(176, 176, 176, 1);
+      padding: .25rem .5rem;
+      &[type='radio']{
+        display: none;
+      }
+      &__label{
+        margin-left: .5rem;
+        transition: all .25s;
+        opacity: 0;
+        display: inline-block;
+        transform: translateY(-100%);
+      }
+    }
+    &__checkbox{
+      flex-direction: row;
+      align-items: center;
+      margin-top: -1rem;
+      margin-bottom: 3rem;
+      &__item{
+        display: block;
+      }
+      &__item:checked + * {
+        .outter-circle{
+          .inner-circle{
+            background: rgba(0, 213, 104, 1);
+          }
+        }
+      }
+      &__label{
+        p{
+          font-size: 2.5rem;
+          margin-left: 1rem;
+        }
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translateY(0%);
+        opacity: 1;
+        &:not(:last-child){
+          margin-right: 2rem;
+        }
+        .outter-circle{
+          position: relative;
+          display: inline-block;
+          background: rgba(0, 213, 104, 0);
+          width: 4rem;
+          height: 4rem;
+          border-radius: 50%;
+          border:.5rem solid rgb(0, 231, 113);
+          .inner-circle{
+            transition: all .25s;
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 213, 104, 0);
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+  }
+}

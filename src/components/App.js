@@ -15,7 +15,7 @@ import Header from './Header';
 import Home from './Home';
 import Users from './Users';
 import Company from './Company';
-// import Add_user from './Add_user'
+import Add_user from './Add_user'
 
 class App extends Component {
   constructor(props){
@@ -33,6 +33,7 @@ class App extends Component {
             <Header store={this.store}/>
             <Route exact path="/" component={Home}/>
             <Route exact path="/users" render={()=><Users store={this.store}/>}/>
+            <Route path="/" component={Add_user}/>
             <Route exact path="/company" component={Company}/>
           </div>
       </BrowserRouter>
