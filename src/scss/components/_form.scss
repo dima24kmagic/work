@@ -1,9 +1,10 @@
 .users__form{
   .group{
+    font-size: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0rem;
     &__item{
       &:focus{
         outline: none;
@@ -12,16 +13,27 @@
           color: transparent;
         }
       }
-      &:invalid{
+      &:focus[value=""]{
         border-bottom: 4px solid rgb(255, 99, 0);
       }
-      &:focus + *{
-        transform: translateY(0%);
+      &[value] + *{
         opacity: 1;
+        transform: translateY(0%);
+      }
+      &[value=""] + *{
+        opacity: 0;
+        transform: translateY(-100%);
       }
       &:invalid + *{
         transform: translateY(-100%);
         opacity: 0;
+      }
+      &:valid{
+        border-bottom: 4px solid rgb(0, 231, 113);
+      }
+      &:focus + *{
+        transform: translateY(0%);
+        opacity: 1;
       }
       border-radius: 4px;
       border: 2px solid rgba(176, 176, 176, 1);
@@ -31,6 +43,7 @@
         display: none;
       }
       &__label{
+        font-size: 2rem;
         margin-left: .5rem;
         transition: all .25s;
         opacity: 0;
@@ -41,8 +54,8 @@
     &__checkbox{
       flex-direction: row;
       align-items: center;
-      margin-top: -1rem;
-      margin-bottom: 3rem;
+      margin-top: 0rem;
+      margin-bottom: 1rem;
       &__item{
         display: block;
       }
@@ -54,6 +67,7 @@
         }
       }
       &__label{
+        cursor: pointer;
         p{
           font-size: 2.5rem;
           margin-left: 1rem;

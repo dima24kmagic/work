@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 
 //Style
+import '../css/bootstrap.css';
 import '../css/index.css';
 
 //Components
@@ -33,7 +34,7 @@ class App extends Component {
             <Header store={this.store}/>
             <Route exact path="/" component={Home}/>
             <Route exact path="/users" render={()=><Users store={this.store}/>}/>
-            <Route path="/" component={Add_user}/>
+            <Route path="/users/add" render={()=><Add_user store={this.store}/>}/>
             <Route exact path="/company" component={Company}/>
           </div>
       </BrowserRouter>
