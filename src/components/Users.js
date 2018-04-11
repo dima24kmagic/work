@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import {Route, Link} from 'react-router-dom';
 import {editUser} from '../action/actions'
 //components
+
+
+
+// console.log(pic1);
+
 class Users extends Component{
   testEdit = (index) => {
     this.props.store.dispatch(editUser(index));
@@ -9,35 +14,27 @@ class Users extends Component{
   }
   render(){
     return(
-      <div className="users">
-        {this.props.store.getState().userReducer.users.map((user, index) => {
-          return(
-            <div className="user" key={index}>
-              {user.isEditing ?<div className='change' onClick={()=>this.testEdit(index)}></div> : <div className='change change--blue' onClick={()=>this.testEdit(index)}></div>}
-              <div className="user__info">
-                <div className="user__info__img"></div>
-                
-                  <div className="user__body__header">
-                    {user.isEditing
-                    ? <div className="user__body__header__name user__body__header__name--chng"><input type='text' value={user.name} /> </div>
-                    : <div className="user__body__header__name"><h2>{user.name}</h2></div>}
+        <div className="users">
+          {this.props.store.getState().userReducer.users.map((user, index) => {
+            return(
 
-                    <div className="user__body__header__gender">{user.gender ? 'Male' : 'Female'}</div>
+
+                <div key={index} className='d-flex row user__row flex-xs-column flex-sm-row'>
+                  <div className='col-12 photo col-sm-4'><img src={user.pic}></img></div>
+                  <div className='col-12 col-sm-8 '>
+                    <div className='row'>
+                      <div className='d-flex col-12 name justify-content-center justify-content-sm-start'>{user.name}
+                        <span>{user.gender ? 'Male' : 'Female'}</span>
+                      </div>
+                      <div className='col-8 lead info'><p>Age: {user.age} <br/>Education: {user.education} <br/>Job: {user.job}</p></div>
+                      <div className='col-4 lead info'><p>TEXT <br/>TEXT <br/>TEXT</p></div>
+                    </div>
                   </div>
-
-                  <div className="user__body__main">
-                    <div className="user__body__info user__info__age">Age: {user.age}</div>
-                    <div className="user__body__info user__info__job">Job: {user.job}</div>
-                    <div className="user__body__info user__info__education">Education: {user.education}</div>
-                    <div className="user__body__info user__info__kids">{user.havekids ? 'Have Kids' : 'Free'}</div>
-                  </div>
-
-              </div>
-            </div>
-          )
-        })}
-        <div ><Link className="btn btn--green" to="/users/add">Add user</Link></div>
-      </div>
+                </div>
+            )
+          })}
+          <div className='u-center-text'><Link className="btn btn--green" to="/users/add">Add user</Link></div>
+        </div>
     )
   }
 }

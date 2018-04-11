@@ -1,3 +1,7 @@
+//__img
+import pic1 from '../img/drake.jpg';
+import pic2 from '../img/kendrik.jpg';
+
 let initialState = {
   users: [
   {
@@ -7,7 +11,8 @@ let initialState = {
     education: 'College',
     job: 'Schooler',
     havekids: false,
-    isEditing: false
+    isEditing: false,
+    pic: pic1
   },
   {
     name: "Dima",
@@ -16,7 +21,8 @@ let initialState = {
     job: 'Schooler',
     education: 'Elementary School',
     havekids: false,
-    isEditing: false
+    isEditing: false,
+    pic: pic2
   }
   ]
 }
