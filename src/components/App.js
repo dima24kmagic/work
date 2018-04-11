@@ -26,6 +26,8 @@ class App extends Component {
     }
     this.store = this.props.route.store;
   }
+
+  // AXIUS
   render() {
     console.log(this.store.getState());
     return (

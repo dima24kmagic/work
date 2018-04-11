@@ -33,8 +33,8 @@ const users = (state = initialState, action) => {
       let newUser = Object.assign({}, action.data);
       return Object.assign({}, state, state.users.push(newUser))
     case 'EDIT_USER':
-      console.log('u changign useredit?');
-      return Object.assign({}, state, state.users[action.data].isEditing = !state.users.isEditing)
+      console.log(state.users[action.data].isEditing);
+      return Object.assign({}, state, state.users[action.data].isEditing = !state.users[action.data].isEditing)
     default:
       return state
   }

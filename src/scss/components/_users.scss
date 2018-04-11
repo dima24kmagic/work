@@ -102,7 +102,30 @@
 .users{
   margin-top: 4rem;
 }
+.edit__form{
+  margin-bottom: 2rem;
+  input:not([type="file"]){
+    border: 1px solid rgb(157, 157, 157);
+    border-bottom: 2px solid rgb(157, 157, 157);
+    border-radius: 4px;
+    &:focus{
+      outline: none;
+      border-bottom: 2px solid rgb(0, 231, 113);
+      &::placeholder{
+        color: transparent;
+      }
+    }
+    &:focus[value=""]{
+      border-bottom: 4px solid rgb(255, 99, 0);
+    }
+    &:valid{
+      // border-bottom: 4px solid rgb(0, 231, 113);
+    }
+  }
+}
 .user__row{
+  background: rgba(0, 0, 0, .01);
+  position: relative;
   margin-top: 5rem;
   transition: transform .25s, box-shadow .25s;
   max-width: 60rem;
@@ -112,6 +135,31 @@
   overflow: hidden;
   min-height: 15rem;
   width: 100%;
+  &:hover{
+    transform: scale(1.01);
+    box-shadow: 0 1.5rem 2.5rem $shadow2;
+  }
+  &--edit{
+      box-shadow: 0 1.5rem 2.5rem $shadow2;
+      transform: scale(1.01);
+      &:hover{
+        transform: scale(1.01);
+      }
+  }
+  .edit{
+    transition: background .25s;
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    font-size: 2.5rem;
+    background: rgb(33, 8, 117);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    z-index: 1;
+    &:hover{
+      background: rgb(70, 43, 158);
+    }
+  }
   &:not(:last-child){
     margin-bottom: 2rem;
   }
@@ -121,16 +169,25 @@
   @media (max-width: $media-phone){
     max-width: 80%;
   }
-  &:hover{
-    transform: scale(1.01);
-    box-shadow: 0 1.5rem 2.5rem $shadow2;
-  }
   .photo{
     padding: 0;
     height: auto;
     background: rgb(173, 136, 198);
     @media (max-width: $media-tab){
       height: 16rem;
+    }
+    &--edit{
+      position: relative;
+      input{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        color: rgb(255, 255, 255);
+        background: rgba(0, 0, 0, 0.65);
+        font-size: 1.5rem;
+      }
     }
     img{
       width: 100%;
@@ -141,8 +198,24 @@
   }
   .name{
     font-size: 3.5rem;
+    &--edit{
+      input{
+        width: 80%;
+        @media (min-width: $media-tab){
+          width: 40%;
+        }
+      }
+    }
+    span{
+      font-weight: 100;
+      color: rgba(0, 0, 0, 0.3);
+      margin-left: .5rem;
+    }
   }
   .info{
     font-size: 2.5rem;
+    input{
+      width: 100%;
+    }
   }
 }

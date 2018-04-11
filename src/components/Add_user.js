@@ -18,7 +18,6 @@ class Add_user extends Component {
     this.setState({
       [stateField]: e.target.value
     })
-    console.log(e.target.value, 'SUP MAN!', this.state[stateField]);
   }
 
   addNewUser = (e) => {

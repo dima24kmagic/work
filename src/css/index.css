@@ -105,7 +105,23 @@ body {
 .users {
   margin-top: 4rem; }
 
+.edit__form {
+  margin-bottom: 2rem; }
+  .edit__form input:not([type="file"]) {
+    border: 1px solid #9d9d9d;
+    border-bottom: 2px solid #9d9d9d;
+    border-radius: 4px; }
+    .edit__form input:not([type="file"]):focus {
+      outline: none;
+      border-bottom: 2px solid #00e771; }
+      .edit__form input:not([type="file"]):focus::placeholder {
+        color: transparent; }
+    .edit__form input:not([type="file"]):focus[value=""] {
+      border-bottom: 4px solid #ff6300; }
+
 .user__row {
+  background: rgba(0, 0, 0, 0.01);
+  position: relative;
   margin-top: 5rem;
   transition: transform .25s, box-shadow .25s;
   max-width: 60rem;
@@ -115,6 +131,26 @@ body {
   overflow: hidden;
   min-height: 15rem;
   width: 100%; }
+  .user__row:hover {
+    transform: scale(1.01);
+    box-shadow: 0 1.5rem 2.5rem rgba(0, 0, 0, 0.2); }
+  .user__row--edit {
+    box-shadow: 0 1.5rem 2.5rem rgba(0, 0, 0, 0.2);
+    transform: scale(1.01); }
+    .user__row--edit:hover {
+      transform: scale(1.01); }
+  .user__row .edit {
+    transition: background .25s;
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    font-size: 2.5rem;
+    background: #210875;
+    color: white;
+    cursor: pointer;
+    z-index: 1; }
+    .user__row .edit:hover {
+      background: #462b9e; }
   .user__row:not(:last-child) {
     margin-bottom: 2rem; }
   @media (max-width: 576px) {
@@ -123,9 +159,6 @@ body {
   @media (max-width: 400px) {
     .user__row {
       max-width: 80%; } }
-  .user__row:hover {
-    transform: scale(1.01);
-    box-shadow: 0 1.5rem 2.5rem rgba(0, 0, 0, 0.2); }
   .user__row .photo {
     padding: 0;
     height: auto;
@@ -133,6 +166,17 @@ body {
     @media (max-width: 576px) {
       .user__row .photo {
         height: 16rem; } }
+    .user__row .photo--edit {
+      position: relative; }
+      .user__row .photo--edit input {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        color: white;
+        background: rgba(0, 0, 0, 0.65);
+        font-size: 1.5rem; }
     .user__row .photo img {
       width: 100%;
       height: 100%;
@@ -140,8 +184,19 @@ body {
       object-position: center; }
   .user__row .name {
     font-size: 3.5rem; }
+    .user__row .name--edit input {
+      width: 80%; }
+      @media (min-width: 576px) {
+        .user__row .name--edit input {
+          width: 40%; } }
+    .user__row .name span {
+      font-weight: 100;
+      color: rgba(0, 0, 0, 0.3);
+      margin-left: .5rem; }
   .user__row .info {
     font-size: 2.5rem; }
+    .user__row .info input {
+      width: 100%; }
 
 .btn {
   display: inline-block;
