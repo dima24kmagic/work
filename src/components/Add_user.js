@@ -6,7 +6,7 @@ class Add_user extends Component {
     this.state = {
       "name": "",
       "gender": true,
-      "age": 0,
+      "age": "",
       "education": "",
       "job": "",
       "havekids": true,
@@ -22,6 +22,7 @@ class Add_user extends Component {
 
   addNewUser = (e) => {
     e.preventDefault();
+    e.currentTarget.reset();
     console.log(this.state);
     this.props.store.dispatch(saveUser(this.state));
     this.setState({
@@ -51,7 +52,7 @@ class Add_user extends Component {
           </div>
           {/* WTF IS GOING ON WITH THE FUCKING NUMBER TYPE INPUT, STUPID ASS MUHFUCKAS DID SMTHNG WRONG AND NOW I CAN'T FIGURE OUT TF IS GOING ON!!!!! */}
           <div className="group">
-            <input maxLength='20' value={this.state.age} className="group__item" type="number" id="age" placeholder="Age" name="age" onClick={(e) => console.log(e.target.value)} required/>
+            <input maxLength='20' className="group__item" type="number" id="age" placeholder="Age" name="age" onClick={(e) => console.log(e.target.value)} required/>
             <label className="group__item__label" htmlFor="age">Age</label>
           </div>
           <div className="group">
