@@ -11,3 +11,10 @@ export const editUser = (data) => {
     data: data
   }
 }
+
+export const saveUser = (data) => {
+  return{
+    type: 'SAVE_USER',
+    data: data
+  }
+}

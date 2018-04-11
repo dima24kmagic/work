@@ -3,14 +3,64 @@ import {Route, Link} from 'react-router-dom';
 import {editUser} from '../action/actions'
 //components
 
+import {addUser} from '../action/actions'
 
 
 // console.log(pic1);
 
 class Users extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      "name": "",
+      "gender": true,
+      "age": 0,
+      "education": "",
+      "job": "",
+      "havekids": true,
+      "pic": ""
+    }
+  }
+
+  getInput = (e, stateField) => {
+    console.log(11, this.state[stateField]);
+    this.setState({
+      [stateField]: e.target.value
+    })
+  }
+
+  editUser = (e, index) => {
+    // e.preventDefault();
+    console.log(e, index);
+    console.log(this.state);
+    this.props.store.dispatch(editUser(index));
+    this.setState({
+      "name": "",
+      "gender": true,
+      "age": '&nbsp',
+      "education": "",
+      "job": "",
+      "havekids": true,
+      "pic": ""
+    })
+  }
   testEdit = (index) => {
     this.props.store.dispatch(editUser(index));
     console.log(this.props.store.getState(), index);
+  }
+  test =  (e, index) => {
+    e.preventDefault();
+    console.log(41, index);
+    this.props.store.dispatch(editUser(index));
+    this.setState({
+      "name": "",
+      "gender": true,
+      "age": '&nbsp',
+      "education": "",
+      "job": "",
+      "havekids": true,
+      "pic": ""
+    })
   }
   render(){
     return(
@@ -18,28 +68,29 @@ class Users extends Component{
           {this.props.store.getState().userReducer.users.map((user, index) => {
             if(user.isEditing){
               return(
-                  <form className='edit__form ' key={index} >
+                  <form onChange={(e)=>this.getInput(e, e.target.name)} onSubmit={(e)=>this.test(e, index)} className='edit__form ' key={index}>
                   <div className='d-flex row user__row user__row--edit flex-xs-column flex-sm-row'>
                     <div className="edit" onClick={()=>this.testEdit(index)}>Save</div>
 
                     <div className='col-12 photo photo--edit col-sm-4'>
-                      <input type='file'/>
+                      <input type='file' name="pic"/>
                       <img src={user.pic}></img>
                     </div>
                     <div className='col-12 col-sm-8 '>
                       <div className='row'>
-                        <div className='d-flex col-12 name name--edit justify-content-center justify-content-sm-start'><input type='text' maxLength="40" placeholder={user.name}/>
+                        <div className='d-flex col-12 name name--edit justify-content-center justify-content-sm-start'><input required type='text' maxLength="40" placeholder={user.name} name="name"/>
                           <span>{user.gender == true ? 'Male' : 'Female'}</span>
                         </div>
                         <div className='col-8 lead info'>
-                          <p>Age: <input type='number' maxLength="20" placeholder={user.age}/> <br/>
-                          Education: <input type='text' maxLength="20" placeholder={user.education}/> <br/>
-                        Job: <input type='text' maxLength="20" placeholder={user.job}/></p>
+                          <p>Age: <input required type='number' maxLength="20" placeholder={user.age} name="age"/> <br/>
+                          Education: <input required type='text' maxLength="20" placeholder={user.education} name="education"/> <br/>
+                        Job: <input required type='text' maxLength="20" placeholder={user.job} name="job"/></p>
                         </div>
 
                       </div>
                     </div>
                   </div>
+                  <button className="btn btn--green">ADD</button>
                   </form>
               )
             }else{

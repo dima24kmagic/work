@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {addUser} from '../action/actions'
+import {saveUser} from '../action/actions'
 class Add_user extends Component {
   constructor(props){
     super(props);
@@ -23,7 +23,7 @@ class Add_user extends Component {
   addNewUser = (e) => {
     e.preventDefault();
     console.log(this.state);
-    this.props.store.dispatch(addUser(this.state));
+    this.props.store.dispatch(saveUser(this.state));
     this.setState({
       "name": "",
       "gender": true,

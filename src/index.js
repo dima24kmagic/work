@@ -4,7 +4,7 @@ import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import { Router, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
-import {BrowserRouter, Route} from 'react-router-dom';
+import {HashRouter, Route} from 'react-router-dom';
 
 import userReducer from './reducers/app.js'
 
@@ -36,9 +36,9 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <HashRouter>
       <Route path="/" render={()=><App store={store}/>}/>
-    </BrowserRouter>
+    </HashRouter>
   </Provider>,
   document.getElementById('root')
 )
@@ -49,9 +49,9 @@ store.subscribe(() => {
   return(
     ReactDOM.render(
       <Provider store={store}>
-        <BrowserRouter>
+        <HashRouter>
           <Route path="/" render={()=><App store={store}/>}/>
-        </BrowserRouter>
+        </HashRouter>
       </Provider>,
       document.getElementById('root')
     )

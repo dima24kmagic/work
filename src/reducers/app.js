@@ -35,6 +35,9 @@ const users = (state = initialState, action) => {
     case 'EDIT_USER':
       console.log(state.users[action.data].isEditing);
       return Object.assign({}, state, state.users[action.data].isEditing = !state.users[action.data].isEditing)
+    case 'SAVE_USER':
+      let savedUser = Object.assign({}, action.data);
+      return Object.assign({}, state, state.users.push(savedUser));
     default:
       return state
   }
