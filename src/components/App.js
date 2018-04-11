@@ -1,6 +1,6 @@
 
 //Dev
-import React, { Component, /*Fragment*/ } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import {
   BrowserRouter,
@@ -30,13 +30,16 @@ class App extends Component {
     console.log(this.store.getState());
     return (
       <BrowserRouter>
-          <div className="app">
-            <Header store={this.store}/>
+        <Fragment>
+          <Header store={this.store}/>
+          <div className="container">
+
             <Route exact path="/" component={Home}/>
-            <Route exact path="/users" render={()=><Users store={this.store}/>}/>
+            <Route exact path="/" render={()=><Users store={this.store}/>}/>
             <Route path="/users/add" render={()=><Add_user store={this.store}/>}/>
             <Route exact path="/company" component={Company}/>
           </div>
+        </Fragment>
       </BrowserRouter>
     );
   }

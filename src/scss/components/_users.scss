@@ -1,37 +1,66 @@
 .users{
   .user{
     position: relative;
-    .change{
-      width: 4rem;
-      height: 4rem;
-      background: rgb(52, 191, 160);
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      cursor: pointer;
-    }
     transition: transform .25s, box-shadow .25s;
     padding: 1rem 1rem;
-    width: 60rem;
+    // width: 60rem;
     // border: 1px solid rgb(79, 79, 79);
     box-shadow: 0 1rem 2.5rem $shadow1;
     border-radius: 4px;
     height: auto;
     margin-bottom: 2rem;
+    max-width: 28rem;
+    width: auto;
+    padding: 1.5rem 6rem;
+    @media (min-width: $media-phone){
+      min-width: 40rem;
+      max-width: 60rem;
+      width: 90%;
+      padding: 1rem;
+    }
     &:hover{
       transform: scale(1.01);
       box-shadow: 0 1.5rem 4rem $shadow2;
+    }
+    .change{
+      width: 4rem;
+      height: 4rem;
+      background: rgb(240, 133, 113);
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      cursor: pointer;
+      &--blue{
+        background: rgb(52, 191, 160);
+      }
     }
     &__body{
       // border: 1px solid green;
       width: 100%;
       &__header{
+        @media (min-width: $media-phone){
+
+        }
+        order: 1;
+        justify-content: center;
+        align-self: flex-start;
+        margin-left: 0;
+        h2{
+          font-size: 5rem;
+        }
+        &__name--chng{
+          width: 50%;
+        }
         width: 100%;
         display: flex;
         margin-left: 1rem;
         align-items: center;
         // border: 1px solid red;
         &__gender{
+          @media (min-width: $media-phone){
+
+          }
+          font-size: 2rem;
           margin-left: .25rem;
           align-self: flex-start;
         }
@@ -39,12 +68,30 @@
       &__main{
         font-size: 2.5rem;
         margin-left: 2rem;
+        width: 100%;
+        order: 3;
+        margin-left: 0;
+        @media (min-width: $media-phone){
+          order: 1;
+        }
       }
     }
     &__info{
+      @media (min-width: $media-phone){
+        flex-direction: row;
+      }
       display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       &__img{
-        width: 15rem;
+        @media (min-width: $media-phone){
+          order: 1;
+          width: 30rem;
+        }
+        order: 2;
+        width: 100%;
+        border-radius: 2px;
         height: 12.5rem;
         background: rgb(173, 136, 198);
       }
