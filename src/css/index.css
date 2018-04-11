@@ -110,10 +110,11 @@ body {
   transition: transform .25s, box-shadow .25s;
   max-width: 60rem;
   margin: 0 auto;
-  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   overflow: hidden;
-  min-height: 15rem; }
+  min-height: 15rem;
+  width: 100%; }
   .user__row:not(:last-child) {
     margin-bottom: 2rem; }
   @media (max-width: 576px) {
@@ -124,7 +125,7 @@ body {
       max-width: 80%; } }
   .user__row:hover {
     transform: scale(1.01);
-    box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.2); }
+    box-shadow: 0 1.5rem 2.5rem rgba(0, 0, 0, 0.2); }
   .user__row .photo {
     padding: 0;
     height: auto;
@@ -177,7 +178,8 @@ body {
 .users__form form {
   display: flex;
   flex-direction: column;
-  justify-content: center; }
+  justify-content: center;
+  max-width: 29rem; }
 .users__form .group {
   font-size: 2rem;
   display: flex;

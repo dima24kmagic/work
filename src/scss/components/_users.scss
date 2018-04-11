@@ -107,10 +107,11 @@
   transition: transform .25s, box-shadow .25s;
   max-width: 60rem;
   margin: 0 auto;
-  box-shadow: 0 .5rem 2rem $shadow2;
+  box-shadow: 0 1rem 1.5rem $shadow2;
   border-radius: 4px;
   overflow: hidden;
   min-height: 15rem;
+  width: 100%;
   &:not(:last-child){
     margin-bottom: 2rem;
   }
@@ -122,7 +123,7 @@
   }
   &:hover{
     transform: scale(1.01);
-    box-shadow: 0 1rem 1.5rem $shadow2;
+    box-shadow: 0 1.5rem 2.5rem $shadow2;
   }
   .photo{
     padding: 0;

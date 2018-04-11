@@ -9,7 +9,8 @@ class Add_user extends Component {
       "age": 0,
       "education": "",
       "job": "",
-      "havekids": true
+      "havekids": true,
+      "pic": ""
     }
   }
 
@@ -30,7 +31,8 @@ class Add_user extends Component {
       "age": '&nbsp',
       "education": "",
       "job": "",
-      "havekids": true
+      "havekids": true,
+      "pic": ""
     })
   }
   render(){
@@ -66,6 +68,10 @@ class Add_user extends Component {
             <label className="group__item__label group__checkbox__label" htmlFor="kids"><span className='outter-circle'><span className='inner-circle'></span></span><p>Have Kids</p></label>
             <input maxLength='20' className="group__item group__checkbox__item" type="radio" value='false' id="free" placeholder="Last Name" name='havekids'/>
             <label className="group__item__label group__checkbox__label" htmlFor="free"><span className='outter-circle'><span className='inner-circle'></span></span><p>Free</p></label>
+          </div>
+          <div className="group">
+            <input maxLength='20' value={this.state.pic} className="group__item" type="file" id="pic" placeholder="Profile Pic" name="pic" required/>
+            <label className="group__item__label" htmlFor="pic">Profile Pic</label>
           </div>
           <button className="btn btn--green">Add</button>
         </form>
