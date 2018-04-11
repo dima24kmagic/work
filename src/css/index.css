@@ -185,7 +185,8 @@ body {
   .user__row .name {
     font-size: 3.5rem; }
     .user__row .name--edit input {
-      width: 80%; }
+      width: 80%;
+      height: 90%; }
       @media (min-width: 576px) {
         .user__row .name--edit input {
           width: 40%; } }

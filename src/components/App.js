@@ -3,7 +3,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import {
-  BrowserRouter,
+  HashRouter,
   Route
 } from 'react-router-dom';
 
@@ -24,14 +24,14 @@ class App extends Component {
     this.state = {
       test: 'wasup!'
     }
-    this.store = this.props.route.store;
+    this.store = this.props.store;
   }
 
   // AXIUS
   render() {
     console.log(this.store.getState());
     return (
-      <BrowserRouter>
+      <HashRouter>
         <Fragment>
           <Header store={this.store}/>
           <div className="container">
@@ -42,7 +42,7 @@ class App extends Component {
             <Route exact path="/company" component={Company}/>
           </div>
         </Fragment>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }

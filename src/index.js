@@ -2,8 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
-import { Router, Route, browserHistory } from 'react-router'
+import { Router, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import {BrowserRouter, Route} from 'react-router-dom';
 
 import userReducer from './reducers/app.js'
 
@@ -26,19 +27,18 @@ import App from './components/App';
 */
 const store = createStore(
   combineReducers({
-    userReducer,
-    routing: routerReducer
+    userReducer
   }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
 // Create an enhanced history that syncs navigation events with the store
-const history = syncHistoryWithStore(browserHistory, store)
+// const history = syncHistoryWithStore(browserHistory, store)
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
-      <Route path="/" component={App} store={store}/>
-    </Router>
+    <BrowserRouter>
+      <Route path="/" render={()=><App store={store}/>}/>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 )
@@ -49,9 +49,9 @@ store.subscribe(() => {
   return(
     ReactDOM.render(
       <Provider store={store}>
-        <Router history={history}>
-          <Route path="/" component={App} store={store}/>
-        </Router>
+        <BrowserRouter>
+          <Route path="/" render={()=><App store={store}/>}/>
+        </BrowserRouter>
       </Provider>,
       document.getElementById('root')
     )

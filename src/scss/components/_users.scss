@@ -201,6 +201,7 @@
     &--edit{
       input{
         width: 80%;
+        height: 90%;
         @media (min-width: $media-tab){
           width: 40%;
         }

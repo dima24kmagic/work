@@ -31,10 +31,11 @@ class Users extends Component{
                         <div className='d-flex col-12 name name--edit justify-content-center justify-content-sm-start'><input type='text' maxLength="40" placeholder={user.name}/>
                           <span>{user.gender == true ? 'Male' : 'Female'}</span>
                         </div>
-                        <div className='col-12 lead info'>
+                        <div className='col-8 lead info'>
                           <p>Age: <input type='number' maxLength="20" placeholder={user.age}/> <br/>
                           Education: <input type='text' maxLength="20" placeholder={user.education}/> <br/>
-                        Job: <input type='text' maxLength="20" placeholder={user.job}/></p></div>
+                        Job: <input type='text' maxLength="20" placeholder={user.job}/></p>
+                        </div>
 
                       </div>
                     </div>
@@ -51,8 +52,7 @@ class Users extends Component{
                         <div className='d-flex col-12 name justify-content-center justify-content-sm-start'>{user.name}
                           <span>{user.gender == true ? 'Male' : 'Female'}</span>
                         </div>
-                        <div className='col-8 lead info'><p>Age: {user.age} <br/>Education: {user.education} <br/>Job: {user.job}</p></div>
-                        <div className='col-4 lead info'><p>TEXT <br/>TEXT <br/>TEXT</p></div>
+                        <div className='col-12 lead info'><p>Age: {user.age} <br/>Education: {user.education} <br/>Job: {user.job}</p></div>
                       </div>
                     </div>
                   </div>
