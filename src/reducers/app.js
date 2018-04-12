@@ -37,7 +37,6 @@ export const users = (state = initialState.users, action) => {
       console.log(state[action.data].isEditing);
       return Object.assign([], state, state[action.data].isEditing = !state[action.data].isEditing)
     case 'SAVE_USER':
-      let savedUser = Object.assign({}, action.data);
       console.log(action.data);
       state[action.data.index] = action.data;
       return /*Object.assign([], state, state.push(savedUser));*/ state

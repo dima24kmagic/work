@@ -158,19 +158,23 @@ body {
     .user__row--edit:hover {
       transform: scale(1.01); }
   .user__row .edit {
-    width: 4rem;
-    height: 4rem;
+    width: 2.5rem;
+    height: 2.5rem;
     transition: background .25s;
     position: absolute;
     top: .5rem;
     right: .5rem;
     font-size: 2.5rem;
-    background: #210875;
-    color: white;
+    background: rgba(33, 8, 117, 0);
+    color: black;
     cursor: pointer;
     z-index: 1; }
+    .user__row .edit img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; }
     .user__row .edit:hover {
-      background: #462b9e; }
+      background: rgba(70, 43, 158, 0); }
   .user__row:not(:last-child) {
     margin-bottom: 2rem; }
   @media (max-width: 576px) {

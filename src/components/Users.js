@@ -57,7 +57,7 @@ class Users extends Component{
               return(
                   <form onChange={(e)=>this.getInput(e, e.target.name)} onSubmit={(e)=>this.saveUser(e, index)} className='edit__form ' key={index}>
                   <div className='d-flex row user__row user__row--edit flex-xs-column flex-sm-row'>
-                    <div className="edit" onClick={()=>this.userEdit(index)}>Save</div>
+                    <div className="edit" onClick={()=>this.userEdit(index)}><img src="https://cdn2.iconfinder.com/data/icons/picons-basic-1/57/basic1-187_floppy_save_disc-512.png"></img></div>
 
                     <div className='col-12 photo photo--edit col-sm-4'>
                       <input type='file' name="pic"/>
@@ -83,7 +83,7 @@ class Users extends Component{
             }else{
               return(
                   <div key={index} className='d-flex row user__row flex-xs-column flex-sm-row'>
-                    <div className="edit" onClick={()=>this.userEdit(index)}><i className="software-pencil"></i></div>
+                    <div className="edit" onClick={()=>this.userEdit(index)}><img src="https://image.flaticon.com/icons/svg/61/61456.svg"></img></div>
                     <div className='col-12 photo col-sm-4'><img alt="user pic" src={user.pic}></img></div>
                     <div className='col-12 col-sm-8 '>
                       <div className='row'>
