@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 // import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import {HashRouter, Route} from 'react-router-dom';
 
-import {users, images, loading} from './reducers/app.js'
+import {users, images, isLoading} from './reducers/app.js'
 
 import App from './components/App';
 
@@ -29,7 +29,7 @@ const store = createStore(
   combineReducers({
     users,
     images,
-    loading
+    isLoading
   }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 

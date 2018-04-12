@@ -63,13 +63,12 @@ export const images = (state = initialState.images, action) => {
   }
 }
 
-export const loading = (state = initialState.isLoading, action) => {
+export const isLoading = (state = initialState.isLoading, action) => {
   switch (action.type) {
     case 'START_LOADING':
-      return !state
+      return state = true
     case 'STOP_LOADING':
-      console.log(state);
-      return !state
+      return state = false
     default:
       return state
   }

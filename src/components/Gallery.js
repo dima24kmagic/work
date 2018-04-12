@@ -12,14 +12,14 @@ import React, {Component} from 'react';
 
 
 
-import {stopLoading} from '../action/actions'
+import {stopLoading, startLoading} from '../action/actions'
 //
 
 
 
 
 let typingTimer;
-let doneTypingInterval = 1000;
+let doneTypingInterval = 700;
 
 class Gallery extends Component{
   /*Our setTimeout function executed when input don't recieve onChange method,
@@ -32,6 +32,7 @@ class Gallery extends Component{
     }
   }
   startSearch = (e) =>{
+    this.props.store.dispatch(startLoading());
     let eventValue = e.target.value;
     this.setState({
       input: e.target.value
@@ -51,6 +52,7 @@ class Gallery extends Component{
     this.props.onSearch(this.state.input);
   }
   render(){
+    console.log(this.props.store.getState().isLoading);
     return(
       <div className="gallery-layout">
         <div className="search-form">
@@ -61,15 +63,19 @@ class Gallery extends Component{
         </div>
 
         <div className="row gal justify-content-center">
+          {
 
-          {this.props.store.getState().images.map((image, i) => {
-            return(
-              <div className="col-12 col-sm-6 col-lg-4 gal__container" key={i}>
-                <img className="gal__pic" src={image.url} alt={image.title}></img>
-              </div>
-            )
-          })
-        }
+            (this.props.store.getState().isLoading)
+            ? <h1>Loading</h1>
+            : this.props.store.getState().images.map((image, i) => {
+              console.log(111);
+              return(
+                <div className="col-12 col-sm-6 col-lg-4 gal__container" key={i}>
+                  <img className="gal__pic" src={image.url} alt={image.title}></img>
+                </div>
+              )
+            })
+          }
         </div>
         <div className="u-center-text mt-4"><div className="btn btn--green">Show More</div></div>
       </div>
