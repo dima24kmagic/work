@@ -12,10 +12,11 @@ class Gallery extends Component{
     // this.props.onSearch(e)
   }
   change = (e) =>{
-    let evetValue = e.target.value;
+    let eventValue = e;
+    var test = this.props.onSearch(eventValue);
     setTimeout(function(){
-      console.log(evetValue);
-    }, 500);
+      console.log(eventValue);
+    }, 5000);
   }
   render(){
     return(
