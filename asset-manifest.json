@@ -1,8 +1,12 @@
 {
-  "main.css": "static/css/main.61b09a99.css",
-  "main.css.map": "static/css/main.61b09a99.css.map",
-  "main.js": "static/js/main.cf6db0eb.js",
-  "main.js.map": "static/js/main.cf6db0eb.js.map",
+  "main.css": "static/css/main.232ef150.css",
+  "main.css.map": "static/css/main.232ef150.css.map",
+  "main.js": "static/js/main.eebec6fa.js",
+  "main.js.map": "static/js/main.eebec6fa.js.map",
   "static/media/drake.jpg": "static/media/drake.d77a21ce.jpg",
-  "static/media/kendrik.jpg": "static/media/kendrik.ce52bd01.jpg"
+  "static/media/kendrik.jpg": "static/media/kendrik.ce52bd01.jpg",
+  "static/media/linea-software-10.eot": "static/media/linea-software-10.b5b4a545.eot",
+  "static/media/linea-software-10.svg": "static/media/linea-software-10.6cfc5077.svg",
+  "static/media/linea-software-10.ttf": "static/media/linea-software-10.8fe30102.ttf",
+  "static/media/linea-software-10.woff": "static/media/linea-software-10.602d0d4d.woff"
 }
