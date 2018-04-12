@@ -32,8 +32,8 @@ class App extends Component {
     this.store = this.props.store;
   }
   onSearch(e){
-      console.log(e.target.value);
-      axios.get(`https://api.giphy.com/v1/gifs/search?q=${e.target.value}&api_key=QJ1gAcASwZQRXeHFkC2UcwWSj8SntI0e&limit=6`)
+      console.log(e);
+      axios.get(`https://api.giphy.com/v1/gifs/search?q=${e}&api_key=QJ1gAcASwZQRXeHFkC2UcwWSj8SntI0e&limit=6`)
       .then(response => {
         console.log(response.data.data);
         return(
@@ -41,6 +41,9 @@ class App extends Component {
       )
       })
       .then(responseData => this.store.dispatch(setImages(responseData)));
+  }
+  testFunc = () => {
+    console.log("Work");
   }
   render() {
     console.log(this.store.getState());
@@ -52,7 +55,7 @@ class App extends Component {
             <Route exact path="/" component={Home}/>
             <Route exact path="/users" render={()=><Users store={this.store}/>}/>
             <Route path="/users/add" render={()=><Add_user store={this.store}/>}/>
-            <Route path="/gallery" render={()=><Gallery store={this.store} onSearch={(e)=>this.onSearch(e)}/>}/>
+            <Route path="/gallery" render={()=><Gallery store={this.store} onSearch={(e)=>this.onSearch(e)} testFunc={this.testFunc}/>}/>
             <Route exact path="/company" component={Company}/>
           </div>
         </Fragment>

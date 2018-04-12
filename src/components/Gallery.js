@@ -1,30 +1,22 @@
 import React, {Component} from 'react';
 
 class Gallery extends Component{
-  test = (e) => {
-    console.log(e.target.value);
-    let event = e;
-    setTimeout(function(e){console.log(e)}, 2000, e)
-    // this.props.onSearch(e)
-  }
-  testpass = (e) => {
-    console.log(e);
-    // this.props.onSearch(e)
-  }
-  change = (e) =>{
-    let eventValue = e;
-    var test = this.props.onSearch(eventValue);
+  startSearch = (e) =>{
+    let eventValue = e.target.value;
+    var test = (e) => {
+      this.props.onSearch(e)
+    }
     setTimeout(function(){
       console.log(eventValue);
-    }, 5000);
+      test(eventValue);
+    }, 1000);
   }
   render(){
     return(
       <div className="gallery-layout">
-
         <div className="search-form">
           <h1 className="search-form__heading">Search</h1>
-          <input type="text" placeholder="Image" className="search-form__input" onChange={(e)=>this.change(e)}/>
+          <input type="text" placeholder="Image" className="search-form__input" onChange={(e)=>this.startSearch(e)}/>
         </div>
 
         <div className="row gal justify-content-center">
