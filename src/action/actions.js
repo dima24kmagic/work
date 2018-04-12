@@ -18,3 +18,10 @@ export const saveUser = (data) => {
     data: data
   }
 }
+
+export const setImages = (data) => {
+  return{
+    type: 'SET_IMAGES',
+    data: data
+  }
+}

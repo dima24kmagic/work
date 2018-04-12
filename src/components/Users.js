@@ -65,7 +65,7 @@ class Users extends Component{
   render(){
     return(
         <div className="users">
-          {this.props.store.getState().userReducer.users.map((user, index) => {
+          {this.props.store.getState().users.map((user, index) => {
             if(user.isEditing){
               return(
                   <form onChange={(e)=>this.getInput(e, e.target.name)} onSubmit={(e)=>this.test(e, index)} className='edit__form ' key={index}>
@@ -90,7 +90,7 @@ class Users extends Component{
                       </div>
                     </div>
                   </div>
-                  <button className="btn btn--green">ADD</button>
+                  <button className="d-none btn btn--green">ADD</button>
                   </form>
               )
             }else{

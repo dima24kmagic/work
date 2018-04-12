@@ -6,7 +6,7 @@ import { Router, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import {HashRouter, Route} from 'react-router-dom';
 
-import userReducer from './reducers/app.js'
+import {users, images} from './reducers/app.js'
 
 import App from './components/App';
 
@@ -27,7 +27,8 @@ import App from './components/App';
 */
 const store = createStore(
   combineReducers({
-    userReducer
+    users,
+    images
   }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 

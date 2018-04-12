@@ -1,12 +1,15 @@
 @import './abstracts/variables';
 @import './abstracts/mixins';
-@import './abstracts/utilities'; 
+@import './abstracts/utilities';
 
 @import './layout/base';
 @import './layout/home';
 @import './layout/users';
+@import './layout/gallery';
 
 @import './components/header';
 @import './components/users';
 @import './components/button';
 @import './components/form';
+@import './components/gallery';
+@import './components/search-form';

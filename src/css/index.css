@@ -78,13 +78,25 @@ body {
   align-items: center;
   font-size: 12rem; }
 
+.gallery-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem; }
+
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   height: 5rem;
   background: linear-gradient(to right bottom, #009148, #00d66a); }
+  @media (max-width: 576px) {
+    .header {
+      flex-direction: column;
+      height: auto;
+      padding: 1rem; } }
   .header__link {
     transition: color .15s;
     display: flex;
@@ -95,6 +107,12 @@ body {
     height: 100%;
     font-size: 2.5rem;
     color: rgba(255, 255, 255, 0.7); }
+    @media (max-width: 576px) {
+      .header__link {
+        width: 100%;
+        margin: 0 !important; }
+        .header__link:not(:last-child) {
+          margin-right: 0rem; } }
     .header__link:hover {
       color: white; }
     .header__link.active {
@@ -317,5 +335,49 @@ body {
           width: 2rem;
           height: 2rem;
           border-radius: 50%; }
+
+.gal {
+  margin-top: 4rem; }
+  .gal__pic {
+    transition: all .3s;
+    width: 100%;
+    object-fit: cover;
+    border: 4px solid rgba(0, 0, 0, 0.19);
+    border-radius: 4px;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    outline: 0px solid rgba(0, 0, 0, 0.19);
+    height: 30rem;
+    object-position: top;
+    margin-bottom: 3rem; }
+    .gal__pic:hover {
+      box-shadow: 0 1.5rem 2.5rem rgba(0, 0, 0, 0.4);
+      transform: translateY(-3px); }
+
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; }
+  .search-form__heading {
+    font-size: 4rem;
+    margin-right: 1rem;
+    background: linear-gradient(to left, #00c2ff, #389aff);
+    -webkit-background-clip: text;
+    color: #009cd1;
+    color: transparent; }
+  .search-form__input {
+    width: 50%;
+    transition: all .25s;
+    padding-left: 1rem;
+    color: white;
+    background: #00e872;
+    border: 2px solid transparent;
+    border-radius: 3px; }
+    .search-form__input:focus {
+      outline: none;
+      border: 2px solid #00987d; }
+    .search-form__input::placeholder {
+      color: rgba(255, 255, 255, 0.73); }
 
 /*# sourceMappingURL=index.css.map */

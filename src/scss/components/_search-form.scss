@@ -1,0 +1,30 @@
+.search-form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  &__heading{
+    font-size: 4rem;
+    margin-right: 1rem;
+    background: linear-gradient(to left, rgb(0, 194, 255), rgb(56, 154, 255));
+    -webkit-background-clip:text;
+    color: rgb(0, 156, 209);
+    color: transparent;
+  }
+  &__input{
+    width: 50%;
+    transition: all .25s;
+    padding-left: 1rem;
+    color: rgb(255, 255, 255);
+    background: rgb(0, 232, 114);
+    border: 2px solid transparent;
+    border-radius: 3px;
+    &:focus{
+      outline: none;
+      border: 2px solid rgb(0, 152, 125);
+    }
+    &::placeholder{
+      color: rgba(255, 255, 255, 0.73);
+    }
+  }
+}
