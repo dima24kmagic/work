@@ -33,7 +33,7 @@ class App extends Component {
   }
   onSearch(e){
       console.log(e.target.value);
-      axios.get(`http://api.giphy.com/v1/gifs/search?q=${e.target.value}&api_key=QJ1gAcASwZQRXeHFkC2UcwWSj8SntI0e&limit=6`)
+      axios.get(`https://api.giphy.com/v1/gifs/search?q=${e.target.value}&api_key=QJ1gAcASwZQRXeHFkC2UcwWSj8SntI0e&limit=6`)
       .then(response => {
         console.log(response.data.data);
         return(

@@ -3,6 +3,19 @@ import React, {Component} from 'react';
 class Gallery extends Component{
   test = (e) => {
     console.log(e.target.value);
+    let event = e;
+    setTimeout(function(e){console.log(e)}, 2000, e)
+    // this.props.onSearch(e)
+  }
+  testpass = (e) => {
+    console.log(e);
+    // this.props.onSearch(e)
+  }
+  change = (e) =>{
+    let evetValue = e.target.value;
+    setTimeout(function(){
+      console.log(evetValue);
+    }, 500);
   }
   render(){
     return(
@@ -10,8 +23,7 @@ class Gallery extends Component{
 
         <div className="search-form">
           <h1 className="search-form__heading">Search</h1>
-          <input type="text" placeholder="Image" className="search-form__input" onChange={(e)=>window.setTimeout(this.props.onSearch(e), 50000)
-}/>
+          <input type="text" placeholder="Image" className="search-form__input" onChange={(e)=>this.change(e)}/>
         </div>
 
         <div className="row gal justify-content-center">
