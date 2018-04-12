@@ -136,7 +136,7 @@
   min-height: 15rem;
   width: 100%;
   &:hover{
-    transform: scale(1.01);
+    transform: translateY(-3px);
     box-shadow: 0 1.5rem 2.5rem $shadow2;
   }
   &--edit{

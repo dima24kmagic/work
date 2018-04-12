@@ -25,7 +25,9 @@ let initialState = {
       pic: pic2
     }
   ],
-  images: []
+  images: [],
+  //isLoading: true/false
+  isLoading: false
 }
 
 export const users = (state = initialState.users, action) => {
@@ -56,6 +58,18 @@ export const images = (state = initialState.images, action) => {
         };
       }
       return Object.assign([], state, images)
+    default:
+      return state
+  }
+}
+
+export const loading = (state = initialState.isLoading, action) => {
+  switch (action.type) {
+    case 'START_LOADING':
+      return !state
+    case 'STOP_LOADING':
+      console.log(state);
+      return !state
     default:
       return state
   }

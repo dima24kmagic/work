@@ -12,7 +12,8 @@ import React, {Component} from 'react';
 
 
 
-
+import {stopLoading} from '../action/actions'
+//
 
 
 
@@ -67,8 +68,10 @@ class Gallery extends Component{
                 <img className="gal__pic" src={image.url} alt={image.title}></img>
               </div>
             )
-          })}
+          })
+        }
         </div>
+        <div className="u-center-text mt-4"><div className="btn btn--green">Show More</div></div>
       </div>
     )
   }

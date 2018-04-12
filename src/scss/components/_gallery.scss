@@ -1,8 +1,9 @@
 .gal{
   margin-top: 4rem;
-  &__container{
-
-  }
+  background: rgba(0, 0, 0, 0.1);
+  min-width: 100%;
+  min-height: 60rem;
+  padding: 3rem 1rem 0 1rem;
   &__pic{
     transition: all .3s;
     width: 100%;

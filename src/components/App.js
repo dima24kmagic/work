@@ -14,7 +14,7 @@ import '../css/index.css';
 import '../css/icon-fonts.css'
 
 // Actions
-import {setImages} from '../action/actions'
+import {setImages, startLoading, stopLoading} from '../action/actions'
 
 //Components
 import Header from './Header';
@@ -34,17 +34,24 @@ class App extends Component {
   }
   onSearch(e){
       console.log(e);
-      axios.get(`https://api.giphy.com/v1/gifs/search?q=${e}&api_key=QJ1gAcASwZQRXeHFkC2UcwWSj8SntI0e&limit=6`)
+      axios.get(`https://api.giphy.com/v1/gifs/search?q=${e}&api_key=QJ1gAcASwZQRXeHFkC2UcwWSj8SntI0e&limit=${3*2}`)
       .then(response => {
         console.log(response.data.data);
+        // this.store.dispatch(loading());
+        this.store.dispatch((startLoading()))
         return(
-        response.data.data
-      )
+          response.data.data
+        )
       })
       .then(responseData => this.store.dispatch(setImages(responseData)));
   }
   testFunc = () => {
     console.log("Work");
+  }
+
+  //Gallery
+  onStopLoading = () => {
+    this.store.dispatch(stopLoading());
   }
   render() {
     console.log(this.store.getState());
@@ -56,7 +63,7 @@ class App extends Component {
             <Route exact path="/" component={Home}/>
             <Route exact path="/users" render={()=><Users store={this.store}/>}/>
             <Route path="/users/add" render={()=><AddUser store={this.store}/>}/>
-            <Route path="/gallery" render={()=><Gallery store={this.store} onSearch={(e)=>this.onSearch(e)} testFunc={this.testFunc}/>}/>
+            <Route path="/gallery" render={()=><Gallery store={this.store} onSearch={(e)=>this.onSearch(e)} testFunc={this.testFunc} stopLoading={this.onStopLoading}/>}/>
             <Route exact path="/company" component={Company}/>
           </div>
         </Fragment>
