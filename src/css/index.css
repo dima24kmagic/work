@@ -359,6 +359,11 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%; }
+  .search-form__form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
   .search-form__heading {
     font-size: 4rem;
     margin-right: 1rem;
