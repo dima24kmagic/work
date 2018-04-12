@@ -1,7 +1,7 @@
 
 //Dev
 import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import {
   HashRouter,
   Route
@@ -11,6 +11,7 @@ import axios from 'axios';
 //Style
 import '../css/bootstrap.css';
 import '../css/index.css';
+import '../css/icon-fonts.css'
 
 // Actions
 import {setImages} from '../action/actions'
@@ -20,7 +21,7 @@ import Header from './Header';
 import Home from './Home';
 import Users from './Users';
 import Company from './Company';
-import Add_user from './Add_user'
+import AddUser from './Add_user'
 import Gallery from './Gallery'
 
 class App extends Component {
@@ -54,7 +55,7 @@ class App extends Component {
           <div className="container">
             <Route exact path="/" component={Home}/>
             <Route exact path="/users" render={()=><Users store={this.store}/>}/>
-            <Route path="/users/add" render={()=><Add_user store={this.store}/>}/>
+            <Route path="/users/add" render={()=><AddUser store={this.store}/>}/>
             <Route path="/gallery" render={()=><Gallery store={this.store} onSearch={(e)=>this.onSearch(e)} testFunc={this.testFunc}/>}/>
             <Route exact path="/company" component={Company}/>
           </div>

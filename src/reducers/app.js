@@ -32,13 +32,15 @@ export const users = (state = initialState.users, action) => {
   switch (action.type) {
     case 'ADD_USER':
       let newUser = Object.assign({}, action.data);
-      return Object.assign({}, state, state.users.push(newUser))
+      return Object.assign({}, state, state.push(newUser))
     case 'EDIT_USER':
       console.log(state[action.data].isEditing);
       return Object.assign([], state, state[action.data].isEditing = !state[action.data].isEditing)
     case 'SAVE_USER':
       let savedUser = Object.assign({}, action.data);
-      return Object.assign([], state, state.push(savedUser));
+      console.log(action.data);
+      state[action.data.index] = action.data;
+      return /*Object.assign([], state, state.push(savedUser));*/ state
     default:
       return state
   }
@@ -49,7 +51,10 @@ export const images = (state = initialState.images, action) => {
     case 'SET_IMAGES':
       let images = [];
       for(let i = 0; i< action.data.length; i+=1){
-        images[i] = {url: action.data[i].images.fixed_height.url};
+        images[i] = {
+          url: action.data[i].images.fixed_height.url,
+          title: action.data[i].title
+        };
       }
       return Object.assign([], state, images)
     default:

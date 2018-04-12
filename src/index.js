@@ -2,8 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
-import { Router, browserHistory } from 'react-router'
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+// import { Router, browserHistory } from 'react-router'
+// import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import {HashRouter, Route} from 'react-router-dom';
 
 import {users, images} from './reducers/app.js'

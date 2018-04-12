@@ -10,6 +10,12 @@
     align-items: center;
   }
   &__heading{
+    @media(max-width: $media-tab){
+      font-size: 3rem
+    }
+    @media(max-width: $media-phone){
+      font-size:2.5rem;
+    }
     font-size: 4rem;
     margin-right: 1rem;
     background: linear-gradient(to left, rgb(0, 194, 255), rgb(56, 154, 255));
@@ -18,13 +24,21 @@
     color: transparent;
   }
   &__input{
-    width: 50%;
+    width: 20%;
     transition: all .25s;
     padding-left: 1rem;
     color: rgb(255, 255, 255);
     background: rgb(0, 232, 114);
     border: 2px solid transparent;
     border-radius: 3px;
+    @media(max-width: $media-tab){
+      width: 50%;
+      font-size: 2.5rem;
+      height: 3.5rem;
+    }
+    @media(max-width: $media-phone){
+      width: 50%;
+    }
     &:focus{
       outline: none;
       border: 2px solid rgb(0, 152, 125);

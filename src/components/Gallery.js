@@ -54,8 +54,8 @@ class Gallery extends Component{
       <div className="gallery-layout">
         <div className="search-form">
           <form className="search-form__form" onChange={(e)=>this.startSearch(e)} onSubmit={(e)=>this.search(e)}>
-          <h1 className="search-form__heading">Search</h1>
-          <input type="text" placeholder="Image" className="search-form__input"/>
+          <h1 className="search-form__heading">Search For</h1>
+          <input type="text" placeholder="Funny Cat's" className="search-form__input"/>
           </form>
         </div>
 
@@ -64,7 +64,7 @@ class Gallery extends Component{
           {this.props.store.getState().images.map((image, i) => {
             return(
               <div className="col-12 col-sm-6 col-lg-4 gal__container" key={i}>
-                <img className="gal__pic" src={image.url}></img>
+                <img className="gal__pic" src={image.url} alt={image.title}></img>
               </div>
             )
           })}

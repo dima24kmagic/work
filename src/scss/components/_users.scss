@@ -147,17 +147,19 @@
       }
   }
   .edit{
+    width: 4rem;
+    height: 4rem;
     transition: background .25s;
     position: absolute;
     top: .5rem;
     right: .5rem;
     font-size: 2.5rem;
-    background: rgb(33, 8, 117);
+    background: rgba(33, 8, 117, 1);
     color: rgb(255, 255, 255);
     cursor: pointer;
     z-index: 1;
     &:hover{
-      background: rgb(70, 43, 158);
+      background: rgba(70, 43, 158, 1);
     }
   }
   &:not(:last-child){
