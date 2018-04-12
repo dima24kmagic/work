@@ -1,15 +1,39 @@
 import React, {Component} from 'react';
 
+
+/*
+ let typingTimer;
+ let doneTypingInterval = 5000;
+ onChange{
+  clearTimeout(typingTimer)
+  typingTimer = setTimeout(doneTyping(), doneTypingInterval);
+ }
+*/
+
+
+
+
+
+
+
+
+let typingTimer;
+let doneTypingInterval = 1000;
+
 class Gallery extends Component{
+  /*Our setTimeout function executed when input don't recieve onChange method,
+    if it does - we clearTimeout before function is executed
+  */ 
   startSearch = (e) =>{
     let eventValue = e.target.value;
     var test = (e) => {
       this.props.onSearch(e)
     }
-    setTimeout(function(){
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(function(){
       console.log(eventValue);
       test(eventValue);
-    }, 1000);
+    }, doneTypingInterval);
   }
   render(){
     return(
