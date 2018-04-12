@@ -18,12 +18,12 @@ import React, {Component} from 'react';
 
 
 let typingTimer;
-let doneTypingInterval = 1000;
+let doneTypingInterval = 5000;
 
 class Gallery extends Component{
   /*Our setTimeout function executed when input don't recieve onChange method,
     if it does - we clearTimeout before function is executed
-  */ 
+  */
   startSearch = (e) =>{
     let eventValue = e.target.value;
     var test = (e) => {
@@ -35,12 +35,17 @@ class Gallery extends Component{
       test(eventValue);
     }, doneTypingInterval);
   }
+  search = (e) => {
+    console.log('Hi!');
+    let eventValue = e.target.value;
+    this.props.onSearch(eventValue);
+  }
   render(){
     return(
       <div className="gallery-layout">
         <div className="search-form">
           <h1 className="search-form__heading">Search</h1>
-          <input type="text" placeholder="Image" className="search-form__input" onChange={(e)=>this.startSearch(e)}/>
+          <input type="text" placeholder="Image" className="search-form__input" onChange={(e)=>this.startSearch(e)} onSubmit={(e)=>this.search(e)}/>
         </div>
 
         <div className="row gal justify-content-center">
