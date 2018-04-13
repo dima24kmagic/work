@@ -14,9 +14,10 @@ import React, {Component} from 'react';
 /*
 ///////////////// SHOW IMAGES WHEN THEY COMPLETLY LOADED ////////////////////
 
-  onLoad img increment counter by one, it's also trigger check action,
-  if counter == images length it's trigger stopLoading action
-
+  We got loaded prop in each img, default is false,
+  in map function on onLoad img event I'm gonna
+  set loaded prop of every img in img array to true
+  and check if all of them set to true = clear preloader
 */
 
 //Components
@@ -36,7 +37,12 @@ class Gallery extends Component{
       input: "",
       imgLoaded: 1,
       display: 'none',
-      preloaderClass: 'flex'
+      preloaderClass: 'flex',
+      loaded: [
+        {
+
+        }
+      ]
     }
   }
   startSearch = (e) =>{

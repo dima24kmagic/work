@@ -54,7 +54,8 @@ export const images = (state = initialState.images, action, testState = initialS
       for(let i = 0; i< action.data.length; i+=1){
         images[i] = {
           url: action.data[i].images.fixed_height.url,
-          title: action.data[i].title
+          title: action.data[i].title,
+          loaded: false
         };
       }
       return Object.assign([], state, images)
