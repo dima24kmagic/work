@@ -14,7 +14,7 @@ import '../css/index.css';
 import '../css/icon-fonts.css'
 
 // Actions
-import {setImages, startLoading, stopLoading} from '../action/actions'
+import {addUser, editUser, saveUser, setImages, startLoading, stopLoading, check} from '../action/actions'
 
 //Components
 import Header from './Header';
@@ -32,6 +32,7 @@ class App extends Component {
     }
     this.store = this.props.store;
   }
+
   onSearch(e){
       console.log(e);
       axios.get(`https://api.giphy.com/v1/gifs/search?q=${e}&api_key=QJ1gAcASwZQRXeHFkC2UcwWSj8SntI0e&limit=${3*2}`)
@@ -49,13 +50,13 @@ class App extends Component {
         console.log(this.store.getState().isLoading);
       });
   }
-  testFunc = () => {
-    console.log("Work");
+  getStoreState = (storeValue) => {
+    return this.store.getState()[storeValue]
   }
-
-  //Gallery
-  onStopLoading = () => {
-    this.store.dispatch(stopLoading());
+  onSaveUserEdit = (e, index, userEdits) => {
+    e.preventDefault();
+    userEdits.index = index;
+    this.store.dispatch(saveUser(userEdits))
   }
   render() {
     console.log(this.store.getState());
@@ -65,7 +66,7 @@ class App extends Component {
           <Header store={this.store}/>
           <div className="container">
             <Route exact path="/" component={Home}/>
-            <Route exact path="/users" render={()=><Users store={this.store}/>}/>
+            <Route exact path="/users" render={()=><Users getStoreState={this.getStoreState} store={this.store}/>}/>
             <Route path="/users/add" render={()=><AddUser store={this.store}/>}/>
             <Route path="/gallery" render={()=><Gallery store={this.store} onSearch={(e)=>this.onSearch(e)} testFunc={this.testFunc} stopLoading={this.onStopLoading}/>}/>
             <Route exact path="/company" component={Company}/>

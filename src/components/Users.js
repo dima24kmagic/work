@@ -50,9 +50,10 @@ class Users extends Component{
     })
   }
   render(){
+
     return(
         <div className="users">
-          {this.props.store.getState().users.map((user, index) => {
+          {this.props.getStoreState('users').map((user, index) => {
             if(user.isEditing){
               return(
                   <form onChange={(e)=>this.getInput(e, e.target.name)} onSubmit={(e)=>this.saveUser(e, index)} className='edit__form ' key={index}>
