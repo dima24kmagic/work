@@ -43,7 +43,11 @@ class App extends Component {
           response.data.data
         )
       })
-      .then(responseData => this.store.dispatch(setImages(responseData)));
+      .then(responseData => {
+        // this.store.dispatch(stopLoading());
+        this.store.dispatch(setImages(responseData));
+        console.log(this.store.getState().isLoading);
+      });
   }
   testFunc = () => {
     console.log("Work");

@@ -11,27 +11,41 @@ import React, {Component} from 'react';
 */
 
 
+/*
+///////////////// SHOW IMAGES WHEN THEY COMPLETLY LOADED ////////////////////
 
-import {stopLoading} from '../action/actions'
-//
+  onLoad img increment counter by one, it's also trigger check action,
+  if counter == images length it's trigger stopLoading action
+
+*/
 
 
 
+//actions
+import {startLoading, check} from '../action/actions'
+
+//Components
+import PreLoader from './Preloader';
 
 let typingTimer;
-let doneTypingInterval = 500;
+let doneTypingInterval = 700;
 
 class Gallery extends Component{
-  /*Our setTimeout function executed when input don't recieve onChange method,
+  /*
+    Our setTimeout function executed when input don't recieve onChange method,
     if it does - we clearTimeout before function is executed
   */
   constructor(props){
     super(props);
     this.state = {
-      input: ""
+      input: "",
+      imgLoaded: 1,
+      display: 'none',
+      prelClass: 'flex'
     }
   }
   startSearch = (e) =>{
+    this.props.store.dispatch(startLoading());
     let eventValue = e.target.value;
     this.setState({
       input: e.target.value
@@ -59,17 +73,38 @@ class Gallery extends Component{
           <input type="text" placeholder="Funny Cat's" className="search-form__input"/>
           </form>
         </div>
-
         <div className="row gal justify-content-center">
-
-          {this.props.store.getState().images.map((image, i) => {
-            return(
-              <div className="col-12 col-sm-6 col-lg-4 gal__container" key={i}>
-                <img className="gal__pic" src={image.url} alt={image.title}></img>
-              </div>
-            )
-          })
-        }
+          {
+            this.props.store.getState().images.map((image, i) => {
+              console.log(111);
+              return(
+                <div className="col-12 col-sm-6 col-lg-4 gal__container" key={i}>
+                  <img className={"d-"+this.state.display+" gal__pic"} src={image.url} alt={image.title}
+                    onLoad={()=>{
+                      this.props.store.dispatch(check({imgLoaded: this.state.imgLoaded, imagesFull: this.props.store.getState().images}));
+                      this.setState({
+                        imgLoaded: this.state.imgLoaded+1
+                      })
+                      if(!this.props.store.getState().isLoading){
+                        this.setState(
+                          {
+                            display:'block',
+                            imgLoaded: 1,
+                            prelClass: 'none'
+                          })
+                      }
+                      if(this.state.imgLoaded !== this.props.store.getState().images.length){
+                        this.setState({
+                          display:'none',
+                          prelClass: 'flex'
+                        })
+                      }
+                    }}></img>
+                  <PreLoader prelClass={this.state.prelClass}/>
+                </div>
+              )
+            })
+          }
         </div>
         <div className="u-center-text mt-4"><div className="btn btn--green">Show More</div></div>
       </div>

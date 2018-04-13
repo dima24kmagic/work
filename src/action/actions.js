@@ -37,3 +37,10 @@ export const stopLoading = () => {
     type: 'STOP_LOADING'
   }
 }
+
+export const check = (data) => {
+  return{
+    type: 'CHECK',
+    data: data
+  }
+}

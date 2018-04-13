@@ -47,7 +47,7 @@ export const users = (state = initialState.users, action) => {
   }
 }
 
-export const images = (state = initialState.images, action) => {
+export const images = (state = initialState.images, action, testState = initialState.isLoading) => {
   switch (action.type) {
     case 'SET_IMAGES':
       let images = [];
@@ -63,13 +63,19 @@ export const images = (state = initialState.images, action) => {
   }
 }
 
-export const loading = (state = initialState.isLoading, action) => {
+export const isLoading = (state = initialState.isLoading, action) => {
   switch (action.type) {
     case 'START_LOADING':
-      return !state
+      return state = true
     case 'STOP_LOADING':
-      console.log(state);
-      return !state
+      return state = false
+    case 'CHECK':
+      console.log('CHECK DATA ---------->', action.data.imgLoaded, 'IMG LENGTH -------->', action.data.imagesFull.length);
+      if(action.data.imgLoaded !== action.data.imagesFull.length){
+        return state = true
+      }else{
+        return state = false
+      }
     default:
       return state
   }

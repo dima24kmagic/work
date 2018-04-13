@@ -410,4 +410,61 @@ body {
     .search-form__input::placeholder {
       color: rgba(255, 255, 255, 0.73); }
 
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0); }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes rotate-reverse {
+  0% {
+    transform: translate(-50%, -50%) rotate(0); }
+  100% {
+    transform: translate(-50%, -50%) rotate(-360deg); } }
+.preloader {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .preloader h1 {
+    margin: 0; }
+  .preloader__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 10rem;
+    height: 10rem; }
+    .preloader__container__orbit {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      border: 4px solid white; }
+    .preloader__container__planet {
+      position: absolute;
+      top: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 8px;
+      width: 8px;
+      border-radius: 50%; }
+    .preloader__container__planet--1 {
+      background: #30c753; }
+    .preloader__container__planet--2 {
+      background: #fa9d5a; }
+    .preloader__container__planet--3 {
+      background: #3977ff; }
+    .preloader__container__orbit--1 {
+      height: 7rem;
+      width: 7rem;
+      animation: rotate 2s infinite; }
+    .preloader__container__orbit--2 {
+      height: 5rem;
+      width: 5rem;
+      animation: rotate-reverse 2s infinite .15s; }
+    .preloader__container__orbit--3 {
+      height: 3rem;
+      width: 3rem;
+      animation: rotate 2s infinite .3s; }
+
 /*# sourceMappingURL=index.css.map */
