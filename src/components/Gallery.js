@@ -19,7 +19,7 @@ import {stopLoading} from '../action/actions'
 
 
 let typingTimer;
-let doneTypingInterval = 1000;
+let doneTypingInterval = 500;
 
 class Gallery extends Component{
   /*Our setTimeout function executed when input don't recieve onChange method,
