@@ -33,7 +33,32 @@ class App extends Component {
     this.store = this.props.store;
   }
 
+  //FUNCTION FOR PASSING STORE STATE
+  getStoreState = (storeValue) => {
+    return this.store.getState()[storeValue]
+  }
+
+  // FUNC'S FOR USER COMPONENT
+  onSaveUserEdit = (e, index, stateData) => {
+    e.preventDefault();
+    stateData.index = index;
+    this.store.dispatch(saveUser(stateData))
+  }
+  onUserEdit = (index) => {
+    this.store.dispatch(editUser(index))
+  }
+
+  //FUNC'S FOR ADD-USER Component
+  onAddNewUser = (e, stateData) => {
+    e.preventDefault();
+    this.store.dispatch(addUser(stateData));
+    e.currentTarget.reset();
+    console.log(stateData);
+  }
+
+  // FUNC'S FOR GALLERY COMPONENT
   onSearch(e){
+      this.store.dispatch(startLoading());
       console.log(e);
       axios.get(`https://api.giphy.com/v1/gifs/search?q=${e}&api_key=QJ1gAcASwZQRXeHFkC2UcwWSj8SntI0e&limit=${3*2}`)
       .then(response => {
@@ -50,13 +75,9 @@ class App extends Component {
         console.log(this.store.getState().isLoading);
       });
   }
-  getStoreState = (storeValue) => {
-    return this.store.getState()[storeValue]
-  }
-  onSaveUserEdit = (e, index, userEdits) => {
-    e.preventDefault();
-    userEdits.index = index;
-    this.store.dispatch(saveUser(userEdits))
+
+  onCheck = (stateData) => {
+    this.store.dispatch(check({imgLoaded: stateData.imgLoaded, imagesFull: this.getStoreState('images')}));
   }
   render() {
     console.log(this.store.getState());
@@ -66,9 +87,31 @@ class App extends Component {
           <Header store={this.store}/>
           <div className="container">
             <Route exact path="/" component={Home}/>
-            <Route exact path="/users" render={()=><Users getStoreState={this.getStoreState} store={this.store}/>}/>
-            <Route path="/users/add" render={()=><AddUser store={this.store}/>}/>
-            <Route path="/gallery" render={()=><Gallery store={this.store} onSearch={(e)=>this.onSearch(e)} testFunc={this.testFunc} stopLoading={this.onStopLoading}/>}/>
+            <Route exact path="/users" render={
+                ()=>{
+                  return(
+                    <Users getStoreState={this.getStoreState}
+                           onSaveUserEdit={this.onSaveUserEdit}
+                           onUserEdit={this.onUserEdit}
+                           />
+                   )
+                     }}/>
+            <Route path="/users/add" render={
+                ()=>{
+                  return(
+                    <AddUser onAddNewUser={this.onAddNewUser}/>
+                  )
+                }
+            }/>
+            <Route path="/gallery" render={
+                ()=>{
+                  return(
+                    <Gallery getStoreState={this.getStoreState}
+                             onSearch={(e)=>this.onSearch(e)}
+                             onCheck={this.onCheck}/>
+                  )
+                }
+            }/>
             <Route exact path="/company" component={Company}/>
           </div>
         </Fragment>

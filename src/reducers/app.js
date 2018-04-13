@@ -34,7 +34,7 @@ export const users = (state = initialState.users, action) => {
   switch (action.type) {
     case 'ADD_USER':
       let newUser = Object.assign({}, action.data);
-      return Object.assign({}, state, state.push(newUser))
+      return Object.assign([], state, state.push(newUser))
     case 'EDIT_USER':
       console.log(state[action.data].isEditing);
       return Object.assign([], state, state[action.data].isEditing = !state[action.data].isEditing)

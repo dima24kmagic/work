@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {editUser, saveUser} from '../action/actions'
 //components
 
 // import {addUser} from '../action/actions'
@@ -19,34 +18,10 @@ class Users extends Component{
       "pic": ""
     }
   }
-  userEdit = (index) => {
-    this.props.store.dispatch(editUser(index));
-  }
   getInput = (e, stateField) => {
     console.log(11, this.state[stateField]);
     this.setState({
       [stateField]: e.target.value
-    })
-  }
-  saveUser = (e, index) => {
-    e.preventDefault();
-    let data = this.state;
-    data.index = index;
-    console.log(data);
-    this.props.store.dispatch(saveUser(data))
-  }
-  test =  (e, index) => {
-    e.preventDefault();
-    console.log(41, index);
-    this.props.store.dispatch(editUser(index));
-    this.setState({
-      "name": "",
-      "gender": true,
-      "age": '&nbsp',
-      "education": "",
-      "job": "",
-      "havekids": true,
-      "pic": ""
     })
   }
   render(){
@@ -56,9 +31,9 @@ class Users extends Component{
           {this.props.getStoreState('users').map((user, index) => {
             if(user.isEditing){
               return(
-                  <form onChange={(e)=>this.getInput(e, e.target.name)} onSubmit={(e)=>this.saveUser(e, index)} className='edit__form ' key={index}>
+                  <form onChange={(e)=>this.getInput(e, e.target.name)} onSubmit={(e)=>this.props.onSaveUserEdit(e, index, this.state)} className='edit__form ' key={index}>
                   <div className='d-flex row user__row user__row--edit flex-xs-column flex-sm-row'>
-                    <div className="edit" onClick={()=>this.userEdit(index)}><img src="https://cdn2.iconfinder.com/data/icons/picons-basic-1/57/basic1-187_floppy_save_disc-512.png" alt="floppy-img"></img></div>
+                    <div className="edit" onClick={()=>this.props.onUserEdit(index)}><img src="https://cdn2.iconfinder.com/data/icons/picons-basic-1/57/basic1-187_floppy_save_disc-512.png" alt="floppy-img"></img></div>
 
                     <div className='col-12 photo photo--edit col-sm-4'>
                       <input type='file' name="pic"/>
@@ -84,7 +59,7 @@ class Users extends Component{
             }else{
               return(
                   <div key={index} className='d-flex row user__row flex-xs-column flex-sm-row'>
-                    <div className="edit" onClick={()=>this.userEdit(index)}><img src="https://image.flaticon.com/icons/svg/61/61456.svg" alt="pencil-img"></img></div>
+                    <div className="edit" onClick={()=>this.props.onUserEdit(index)}><img src="https://image.flaticon.com/icons/svg/61/61456.svg" alt="pencil-img"></img></div>
                     <div className='col-12 photo col-sm-4'><img alt="user pic" src={user.pic}></img></div>
                     <div className='col-12 col-sm-8 '>
                       <div className='row'>

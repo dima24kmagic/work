@@ -19,11 +19,6 @@ import React, {Component} from 'react';
 
 */
 
-
-
-//actions
-import {startLoading, check} from '../action/actions'
-
 //Components
 import PreLoader from './Preloader';
 
@@ -45,7 +40,6 @@ class Gallery extends Component{
     }
   }
   startSearch = (e) =>{
-    this.props.store.dispatch(startLoading());
     let eventValue = e.target.value;
     this.setState({
       input: e.target.value
@@ -59,11 +53,6 @@ class Gallery extends Component{
       test(eventValue);
     }, doneTypingInterval);
   }
-  search = (e) => {
-    e.preventDefault();
-    console.log(this.state.input);
-    this.props.onSearch(this.state.input);
-  }
   render(){
     return(
       <div className="gallery-layout">
@@ -75,17 +64,17 @@ class Gallery extends Component{
         </div>
         <div className="row gal justify-content-center">
           {
-            this.props.store.getState().images.map((image, i) => {
+            this.props.getStoreState('images').map((image, i) => {
               console.log(111);
               return(
                 <div className="col-12 col-sm-6 col-lg-4 gal__container" key={i}>
                   <img className={"d-"+this.state.display+" gal__pic"} src={image.url} alt={image.title}
                     onLoad={()=>{
-                      this.props.store.dispatch(check({imgLoaded: this.state.imgLoaded, imagesFull: this.props.store.getState().images}));
+                      this.props.onCheck(this.state);
                       this.setState({
                         imgLoaded: this.state.imgLoaded+1
                       })
-                      if(!this.props.store.getState().isLoading){
+                      if(!this.props.getStoreState('isLoading')){
                         this.setState(
                           {
                             display:'block',
@@ -93,7 +82,7 @@ class Gallery extends Component{
                             prelClass: 'none'
                           })
                       }
-                      if(this.state.imgLoaded !== this.props.store.getState().images.length){
+                      if(this.state.imgLoaded !== this.props.getStoreState('images').length){
                         this.setState({
                           display:'none',
                           prelClass: 'flex'
