@@ -2,8 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
-// import { Router, browserHistory } from 'react-router'
-// import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+
 import {HashRouter, Route} from 'react-router-dom';
 
 import {users, images, isLoading} from './reducers/app.js'
@@ -22,9 +21,22 @@ import App from './components/App';
   education: 111,
   havekids: false
   }
-  ]
+  ],
+  image: [
+  {
+    url: 'qwfqwf',
+    title: 'qwfqwf'
+  }
+  ],
+  isLoaded: true
 }
 */
+
+
+// CREATING STORE AND PASSING REDUCERS
+//+ PASSING window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// TO USE OUR REDUX TOOLS
+
 const store = createStore(
   combineReducers({
     users,
@@ -32,9 +44,6 @@ const store = createStore(
     isLoading
   }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
-
-// Create an enhanced history that syncs navigation events with the store
-// const history = syncHistoryWithStore(browserHistory, store)
 
 ReactDOM.render(
   <Provider store={store}>
@@ -45,8 +54,7 @@ ReactDOM.render(
   document.getElementById('root')
 )
 
-// store.dispatch()
-
+//RE RENDER OUR APPLICATION ON EVERY DISPATCH
 store.subscribe(() => {
   return(
     ReactDOM.render(

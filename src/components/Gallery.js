@@ -36,7 +36,7 @@ class Gallery extends Component{
       input: "",
       imgLoaded: 1,
       display: 'none',
-      prelClass: 'flex'
+      preloaderClass: 'flex'
     }
   }
   startSearch = (e) =>{
@@ -57,39 +57,44 @@ class Gallery extends Component{
     return(
       <div className="gallery-layout">
         <div className="search-form">
-          <form className="search-form__form" onChange={(e)=>this.startSearch(e)} onSubmit={(e)=>this.search(e)}>
+          <form className="search-form__form" onChange={(e)=>this.startSearch(e)} onSubmit={(e)=>this.props.onSearch(e)}>
           <h1 className="search-form__heading">Search For</h1>
           <input type="text" placeholder="Funny Cat's" className="search-form__input"/>
           </form>
         </div>
         <div className="row gal justify-content-center">
           {
+
             this.props.getStoreState('images').map((image, i) => {
               console.log(111);
               return(
                 <div className="col-12 col-sm-6 col-lg-4 gal__container" key={i}>
                   <img className={"d-"+this.state.display+" gal__pic"} src={image.url} alt={image.title}
                     onLoad={()=>{
+                      /*Check check for img loaded to the page and compare it imgs array length*/
                       this.props.onCheck(this.state);
+                      //Add the img loaded counter
                       this.setState({
                         imgLoaded: this.state.imgLoaded+1
                       })
+                      //IF NOT loading, set display to block and preloader display to none, reset imgLoaded counter
                       if(!this.props.getStoreState('isLoading')){
                         this.setState(
                           {
                             display:'block',
                             imgLoaded: 1,
-                            prelClass: 'none'
+                            preloaderClass: 'none'
                           })
                       }
+                      // set the preloader display flex and img display none
                       if(this.state.imgLoaded !== this.props.getStoreState('images').length){
                         this.setState({
                           display:'none',
-                          prelClass: 'flex'
+                          preloaderClass: 'flex'
                         })
                       }
                     }}></img>
-                  <PreLoader prelClass={this.state.prelClass}/>
+                  <PreLoader prelClass={this.state.preloaderClass}/>
                 </div>
               )
             })
