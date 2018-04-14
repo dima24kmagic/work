@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class Preloader extends Component{
   render(){
     return(
-      <div className={"d-"+ this.props.prelClass + " preloader"}>
+      <div className={"d-"+ this.props.preloaderDisplay + " preloader"}>
         <h1>Loading...</h1>
         <div className="preloader__container">
 

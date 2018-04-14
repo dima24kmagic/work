@@ -11,14 +11,7 @@ import React, {Component} from 'react';
 */
 
 
-/*
-///////////////// SHOW IMAGES WHEN THEY COMPLETLY LOADED ////////////////////
 
-  We got loaded prop in each img, default is false,
-  in map function on onLoad img event I'm gonna
-  set loaded prop of every img in img array to true
-  and check if all of them set to true = clear preloader
-*/
 
 //Components
 import PreLoader from './Preloader';
@@ -34,29 +27,29 @@ class Gallery extends Component{
   constructor(props){
     super(props);
     this.state = {
-      input: "",
       imgLoaded: 1,
-      display: 'none',
-      preloaderClass: 'flex',
-      loaded: [
-        {
-
-        }
-      ]
+      imgDisplay: "none",
+      preloaderDisplay: "none",
+      imgQuantity: 1
     }
   }
   startSearch = (e) =>{
     let eventValue = e.target.value;
     this.setState({
-      input: e.target.value
+      preloaderDisplay: "block",
+      imgDisplay: "none",
+      imgLoaded: 1
     })
-    var test = (e) => {
+    if(e.target.value == ""){
+      this.setState({preloaderDisplay: "none"})
+    }
+    let search = (e) => {
       this.props.onSearch(e)
     }
     clearTimeout(typingTimer);
     typingTimer = setTimeout(function(){
       console.log(eventValue);
-      test(eventValue);
+      search(eventValue);
     }, doneTypingInterval);
   }
   render(){
@@ -69,38 +62,36 @@ class Gallery extends Component{
           </form>
         </div>
         <div className="row gal justify-content-center">
+          <PreLoader preloaderDisplay={this.state.preloaderDisplay}/>
           {
-
+            /*
+                    SHOW IMAGES WHEN THEY COMPLETLY LOADED
+              On load i'm gonna increment counter of loaded images,
+              if it's qual to images array that was fetched from giphys,
+              that's mean, that our images all was uploaded,
+              if it's so, i gave images block display and for preloader = display of none,
+              and finally refresh counter to a 1 (refreshing counter only if button not worked, if it work - i don't need to refresh counter,
+              I shoud do this on typing, 'cause it's gonna be new images array)
+            */
             this.props.getStoreState('images').map((image, i) => {
-              console.log(111);
+              // console.log(111);
               return(
                 <div className="col-12 col-sm-6 col-lg-4 gal__container" key={i}>
-                  <img className={"d-"+this.state.display+" gal__pic"} src={image.url} alt={image.title}
+
+                  <img className={"d-"+this.state.imgDisplay+" gal__pic"} src={image.url} alt={image.title}
                     onLoad={()=>{
-                      /*Check check for img loaded to the page and compare it imgs array length*/
-                      this.props.onCheck(this.state);
-                      //Add the img loaded counter
-                      this.setState({
-                        imgLoaded: this.state.imgLoaded+1
-                      })
-                      //IF NOT loading, set display to block and preloader display to none, reset imgLoaded counter
-                      if(!this.props.getStoreState('isLoading')){
-                        this.setState(
-                          {
-                            display:'block',
-                            imgLoaded: 1,
-                            preloaderClass: 'none'
+                      // console.log(this.props.getStoreState('images').length);
+                      // console.log(this.state.imgLoaded);
+                        if(this.state.imgLoaded == this.props.getStoreState('images').length){
+                          this.setState({
+                            imgDisplay: "block",
+                            preloaderDisplay: "none",
+                            imgLoaded: 1
                           })
-                      }
-                      // set the preloader display flex and img display none
-                      if(this.state.imgLoaded !== this.props.getStoreState('images').length){
-                        this.setState({
-                          display:'none',
-                          preloaderClass: 'flex'
-                        })
-                      }
+                          console.log('RESET');
+                        }
+                        this.setState({imgLoaded: this.state.imgLoaded+1})
                     }}></img>
-                  <PreLoader prelClass={this.state.preloaderClass}/>
                 </div>
               )
             })

@@ -58,13 +58,9 @@ class App extends Component {
 
   // FUNC'S FOR GALLERY COMPONENT
   onSearch(e){
-      this.store.dispatch(startLoading());
-      console.log(e);
       axios.get(`https://api.giphy.com/v1/gifs/search?q=${e}&api_key=QJ1gAcASwZQRXeHFkC2UcwWSj8SntI0e&limit=${3*2}`)
       .then(response => {
         console.log(response.data.data);
-        // this.store.dispatch(loading());
-        this.store.dispatch((startLoading()))
         return(
           response.data.data
         )
@@ -72,13 +68,13 @@ class App extends Component {
       .then(responseData => {
         // this.store.dispatch(stopLoading());
         this.store.dispatch(setImages(responseData));
-        console.log(this.store.getState().isLoading);
       });
   }
 
   onCheck = (stateData) => {
     this.store.dispatch(check({imgLoaded: stateData.imgLoaded, imagesFull: this.getStoreState('images')}));
   }
+
   render() {
     console.log(this.store.getState());
     return (

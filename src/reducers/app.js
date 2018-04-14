@@ -51,6 +51,7 @@ export const images = (state = initialState.images, action, testState = initialS
   switch (action.type) {
     case 'SET_IMAGES':
       let images = [];
+      console.log('ARRAY DAT LENGTH ---->', action.data.length);
       for(let i = 0; i< action.data.length; i+=1){
         images[i] = {
           url: action.data[i].images.fixed_height.url,
@@ -58,7 +59,9 @@ export const images = (state = initialState.images, action, testState = initialS
           loaded: false
         };
       }
-      return Object.assign([], state, images)
+      console.log('ARRAY AFTER SETTING VALUES ---->', images);
+      let newState = state = images;
+      return newState
     default:
       return state
   }
@@ -71,12 +74,7 @@ export const isLoading = (state = initialState.isLoading, action) => {
     case 'STOP_LOADING':
       return state = false
     case 'CHECK':
-      console.log('CHECK DATA ---------->', action.data.imgLoaded, 'IMG LENGTH -------->', action.data.imagesFull.length);
-      if(action.data.imgLoaded !== action.data.imagesFull.length){
-        return state = true
-      }else{
-        return state = false
-      }
+
     default:
       return state
   }

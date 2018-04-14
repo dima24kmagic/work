@@ -15,6 +15,10 @@
   }
 }
 .preloader{
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: center;
   align-items: center;

@@ -344,6 +344,7 @@ body {
           border-radius: 50%; }
 
 .gal {
+  position: relative;
   margin-top: 4rem;
   background: rgba(0, 0, 0, 0.1);
   min-width: 100%;
@@ -421,6 +422,10 @@ body {
   100% {
     transform: translate(-50%, -50%) rotate(-360deg); } }
 .preloader {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: center;
   align-items: center; }
