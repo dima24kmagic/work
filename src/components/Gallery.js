@@ -35,22 +35,22 @@ class Gallery extends Component{
   }
   startSearch = (e) =>{
     let eventValue = e.target.value;
-    this.setState({
-      preloaderDisplay: "block",
-      imgDisplay: "none",
-      imgLoaded: 1
-    })
-    if(e.target.value == ""){
-      this.setState({preloaderDisplay: "none"})
-    }
     let search = (e) => {
       this.props.onSearch(e)
     }
-    clearTimeout(typingTimer);
-    typingTimer = setTimeout(function(){
-      console.log(eventValue);
-      search(eventValue);
-    }, doneTypingInterval);
+    this.setState({
+      preloaderDisplay: "block",
+      // imgDisplay: "none"
+    })
+    if(e.target.value == ""){
+      this.setState({preloaderDisplay: "none"})
+    }else{
+      clearTimeout(typingTimer);
+      typingTimer = setTimeout(function(){
+        console.log(eventValue);
+        search(eventValue);
+      }, doneTypingInterval);
+    }
   }
   render(){
     return(
@@ -77,11 +77,11 @@ class Gallery extends Component{
               // console.log(111);
               return(
                 <div className="col-12 col-sm-6 col-lg-4 gal__container" key={i}>
-
                   <img className={"d-"+this.state.imgDisplay+" gal__pic"} src={image.url} alt={image.title}
                     onLoad={()=>{
-                      // console.log(this.props.getStoreState('images').length);
-                      // console.log(this.state.imgLoaded);
+                      console.log(this.props.getStoreState('images').length);
+                      console.log(this.state.imgLoaded);
+                      this.setState({imgLoaded: this.state.imgLoaded+1})
                         if(this.state.imgLoaded == this.props.getStoreState('images').length){
                           this.setState({
                             imgDisplay: "block",
@@ -90,7 +90,7 @@ class Gallery extends Component{
                           })
                           console.log('RESET');
                         }
-                        this.setState({imgLoaded: this.state.imgLoaded+1})
+
                     }}></img>
                 </div>
               )

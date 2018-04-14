@@ -422,10 +422,15 @@ body {
   100% {
     transform: translate(-50%, -50%) rotate(-360deg); } }
 .preloader {
+  background: rgba(0, 0, 0, 0.56);
+  color: #f7b268;
+  border-radius: 8px;
+  padding: 2rem;
+  z-index: 10000;
   position: absolute;
-  top: 10%;
+  top: 20%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, 0%);
   display: flex;
   justify-content: center;
   align-items: center; }
