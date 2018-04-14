@@ -60,10 +60,16 @@ class App extends Component {
   onSearch(e){
       axios.get(`https://api.giphy.com/v1/gifs/search?q=${e}&api_key=QJ1gAcASwZQRXeHFkC2UcwWSj8SntI0e&limit=${3*2}`)
       .then(response => {
-        console.log(response.data.data);
-        return(
-          response.data.data
-        )
+        if(response.data.data.length == 0){
+          return(
+            [{images:{fixed_height:{url:'http://likesreview.wpengine.com/wp-content/uploads/2017/08/Placeholder_Graphic.jpg', title:'no response'}}}]
+          )
+        }else{
+          console.log(response.data.data);
+          return(
+            response.data.data
+          )
+        }
       })
       .then(responseData => {
         // this.store.dispatch(stopLoading());
