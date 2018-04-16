@@ -28,22 +28,26 @@ class Gallery extends Component{
     super(props);
     this.state = {
       imgLoaded: 1,
-      imgDisplay: "none",
-      preloaderDisplay: "none",
-      imgQuantity: 1
+      loading: false,
+      images: []
     }
   }
   startSearch = (e) =>{
     let eventValue = e.target.value;
     let search = (e) => {
+      this.setState({images: this.props.getStoreState('images')})
       this.props.onSearch(e)
+      if(this.state.images == this.props.getStoreState('images')){
+        console.log("IM TRIGGERED");
+        this.setState({loading: false})
+      }
+      this.setState({images: this.props.getStoreState('images')})
     }
     this.setState({
-      preloaderDisplay: "block",
-      // imgDisplay: "none"
+      loading: true
     })
     if(e.target.value == ""){
-      this.setState({preloaderDisplay: "none"})
+      this.setState({loading: false})
     }else{
       clearTimeout(typingTimer);
       typingTimer = setTimeout(function(){
@@ -62,7 +66,11 @@ class Gallery extends Component{
           </form>
         </div>
         <div className="row gal justify-content-center">
-          <PreLoader preloaderDisplay={this.state.preloaderDisplay}/>
+          {
+            (this.state.loading)
+            ?<PreLoader preloaderDisplay="flex"/>
+            : ""
+          }
           {
             /*
                     SHOW IMAGES WHEN THEY COMPLETLY LOADED
@@ -81,11 +89,10 @@ class Gallery extends Component{
                     onLoad={()=>{
                       console.log(this.props.getStoreState('images').length);
                       console.log(this.state.imgLoaded);
-                      this.setState({imgLoaded: this.state.imgLoaded+1})
+                      this.setState({imgLoaded: this.state.imgLoaded+1, loading:true})
                         if(this.state.imgLoaded == this.props.getStoreState('images').length){
                           this.setState({
-                            imgDisplay: "block",
-                            preloaderDisplay: "none",
+                            loading: false,
                             imgLoaded: 1
                           })
                           console.log('RESET');
