@@ -18,7 +18,7 @@ import PreLoader from './Preloader';
 
 let typingTimer;
 let doneTypingInterval = 700;
-
+let previousInput = "";
 class Gallery extends Component{
   /*
     Our setTimeout function executed when input don't recieve onChange method,
@@ -27,29 +27,28 @@ class Gallery extends Component{
   constructor(props){
     super(props);
     this.state = {
-      imgLoaded: 1,
-      imgDisplay: "none",
-      preloaderDisplay: "none",
-      imgQuantity: 1
+      loading: false,
+      images: {}
     }
   }
   startSearch = (e) =>{
     let eventValue = e.target.value;
-    let search = (e) => {
-      this.props.onSearch(e)
+    if(eventValue.slice(-1) == " "){
+      console.log('SPACE IS PRESSED');
     }
-    this.setState({
-      preloaderDisplay: "block",
-      // imgDisplay: "none"
-    })
-    if(e.target.value == ""){
-      this.setState({preloaderDisplay: "none"})
-    }else{
+    if(eventValue.slice(-1) !== " " && eventValue.slice(-1) !== ""){
+      this.setState({loading:true})
       clearTimeout(typingTimer);
       typingTimer = setTimeout(function(){
         console.log(eventValue);
         search(eventValue);
       }, doneTypingInterval);
+    }
+    let search = (e) => {
+      this.props.onSearch(e)
+    }
+    if(e.target.value == ""){
+      this.setState({loading:false})
     }
   }
   render(){
@@ -62,35 +61,21 @@ class Gallery extends Component{
           </form>
         </div>
         <div className="row gal justify-content-center">
-          <PreLoader preloaderDisplay={this.state.preloaderDisplay}/>
           {
-            /*
-                    SHOW IMAGES WHEN THEY COMPLETLY LOADED
-              On load i'm gonna increment counter of loaded images,
-              if it's qual to images array that was fetched from giphys,
-              that's mean, that our images all was uploaded,
-              if it's so, i gave images block display and for preloader = display of none,
-              and finally refresh counter to a 1 (refreshing counter only if button not worked, if it work - i don't need to refresh counter,
-              I shoud do this on typing, 'cause it's gonna be new images array)
-            */
+            (this.state.loading)
+            ? <PreLoader/>
+            : ""
+          }
+          {
             this.props.getStoreState('images').map((image, i) => {
               // console.log(111);
               return(
                 <div className="col-12 col-sm-6 col-lg-4 gal__container" key={i}>
                   <img className={"d-"+this.state.imgDisplay+" gal__pic"} src={image.url} alt={image.title}
                     onLoad={()=>{
-                      console.log(this.props.getStoreState('images').length);
-                      console.log(this.state.imgLoaded);
-                      this.setState({imgLoaded: this.state.imgLoaded+1})
-                        if(this.state.imgLoaded == this.props.getStoreState('images').length){
-                          this.setState({
-                            imgDisplay: "block",
-                            preloaderDisplay: "none",
-                            imgLoaded: 1
-                          })
-                          console.log('RESET');
-                        }
-
+                      if(i+1 == this.props.getStoreState('images').length){
+                        this.setState({loading: false})
+                      }
                     }}></img>
                 </div>
               )
