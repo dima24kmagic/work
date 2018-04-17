@@ -50,17 +50,7 @@ export const users = (state = initialState.users, action) => {
 export const images = (state = initialState.images, action, testState = initialState.isLoading) => {
   switch (action.type) {
     case 'SET_IMAGES':
-      let images = [];
-      console.log('ARRAY DAT LENGTH ---->', action.data.length);
-      for(let i = 0; i< action.data.length; i+=1){
-        images[i] = {
-          url: action.data[i].images.fixed_height.url,
-          title: action.data[i].title,
-          loaded: false
-        };
-      }
-      console.log('ARRAY AFTER SETTING VALUES ---->', images);
-      let newState = state = images;
+      let newState = state = action.data;
       return newState
     default:
       return state
@@ -73,7 +63,8 @@ export const isLoading = (state = initialState.isLoading, action) => {
       return state = true
     case 'STOP_LOADING':
       return state = false
-    case 'CHECK':
+    case 'ON_LOAD':
+      return state = action.data
 
     default:
       return state

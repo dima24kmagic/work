@@ -38,9 +38,9 @@ export const stopLoading = () => {
   }
 }
 
-export const check = (data) => {
+export const onLoad = (data) => {
   return{
-    type: 'CHECK',
+    type: "ON_LOAD",
     data: data
   }
 }
