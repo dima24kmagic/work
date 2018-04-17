@@ -15,6 +15,7 @@ import React, {Component} from 'react';
 
 //Components
 import PreLoader from './Preloader';
+import Images from './Images'
 
 let typingTimer;
 let doneTypingInterval = 700;
@@ -32,6 +33,7 @@ class Gallery extends Component{
     }
   }
   startSearch = (e) =>{
+    console.log(e.keyCode);
     let eventValue = e.target.value;
     if(eventValue.slice(-1) == " "){
       console.log('SPACE IS PRESSED');
@@ -51,6 +53,7 @@ class Gallery extends Component{
       this.setState({loading:false})
     }
   }
+
   render(){
     return(
       <div className="gallery-layout">
@@ -99,9 +102,8 @@ class Gallery extends Component{
                     }}></img>
                 </div>
               )
-            })
-          }
-        </div>
+            })}
+          </div>
         <div className="u-center-text mt-4"><div className="btn btn--green">Show More</div></div>
       </div>
     )

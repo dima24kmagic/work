@@ -14,7 +14,7 @@ import '../css/index.css';
 import '../css/icon-fonts.css'
 
 // Actions
-import {addUser, editUser, saveUser, setImages, startLoading, stopLoading, check} from '../action/actions'
+import {addUser, editUser, saveUser, setImages, startLoading, stopLoading, onLoad} from '../action/actions'
 
 //Components
 import Header from './Header';
@@ -24,6 +24,8 @@ import Company from './Company';
 import AddUser from './Add_user'
 import Gallery from './Gallery'
 
+
+let images = [];
 class App extends Component {
   constructor(props){
     super(props);
@@ -61,19 +63,27 @@ class App extends Component {
       axios.get(`https://api.giphy.com/v1/gifs/search?q=${e}&api_key=QJ1gAcASwZQRXeHFkC2UcwWSj8SntI0e&limit=${3*2}`)
       .then(response => {
         if(response.data.data.length == 0){
+          this.onLoad(false)
           return(
             [{images:{fixed_height:{url:'http://likesreview.wpengine.com/wp-content/uploads/2017/08/Placeholder_Graphic.jpg', title:'no response'}}}]
           )
         }else{
+          this.onLoad(true);
+          // console.log("IMAGES ARRAY ---->", images, "STORE IMAGES ARRAY ------>", this.getStoreState('images'));
           console.log(response.data.data);
+          for(let i = 0; i<response.data.data.length; i+=1){
+            images[i] = {
+              url: response.data.data[i].images.fixed_height.url,
+              title: response.data.data[i].title
+            }
+          }
           return(
-            response.data.data
+            images
           )
         }
       })
       .then(responseData => {
-        // this.store.dispatch(stopLoading());
-        this.store.dispatch(setImages(responseData));
+          this.store.dispatch(setImages(responseData));
       });
   }
 
@@ -81,8 +91,12 @@ class App extends Component {
     this.store.dispatch(check({imgLoaded: stateData.imgLoaded, imagesFull: this.getStoreState('images')}));
   }
 
+  onLoad = (data) => {
+      this.store.dispatch(onLoad(data))
+  }
+
   render() {
-    console.log(this.store.getState());
+    // console.log(this.store.getState());
     return (
       <HashRouter>
         <Fragment>
@@ -110,7 +124,7 @@ class App extends Component {
                   return(
                     <Gallery getStoreState={this.getStoreState}
                              onSearch={(e)=>this.onSearch(e)}
-                             onCheck={this.onCheck}/>
+                             onLoad={this.onLoad}/>
                   )
                 }
             }/>
