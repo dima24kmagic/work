@@ -68,6 +68,7 @@ class App extends Component {
             [{images:{fixed_height:{url:'http://likesreview.wpengine.com/wp-content/uploads/2017/08/Placeholder_Graphic.jpg', title:'no response'}}}]
           )
         }else{
+          this.onLoad(true);
           // console.log("IMAGES ARRAY ---->", images, "STORE IMAGES ARRAY ------>", this.getStoreState('images'));
           console.log(response.data.data);
           for(let i = 0; i<response.data.data.length; i+=1){

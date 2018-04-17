@@ -18,7 +18,6 @@ class Images extends Component{
         }
         {
           this.props.getStoreState('images').map((image, i) => {
-            // console.log(111);
             return(
               <div className="col-12 col-sm-6 col-lg-4 gal__container" key={i}>
                 <img className="gal__pic" src={image.url} alt={image.title}
@@ -27,6 +26,8 @@ class Images extends Component{
                     if(i+1 == this.props.getStoreState('images').length){
                       console.log("-------------> set to false");
                       this.props.onLoad(false);
+                    }else{
+                      // this.props.onLoad(true);                      
                     }
                   }}></img>
               </div>
