@@ -35,13 +35,12 @@ class Gallery extends Component{
   startSearch = (e) =>{
     let eventValue = e.target.value;
     let search = (e) => {
-      this.setState({images: this.props.getStoreState('images')})
-      this.props.onSearch(e)
-      if(this.state.images == this.props.getStoreState('images')){
-        console.log("IM TRIGGERED");
+      if(this.state.images !== this.props.getStoreState('images')){
+        this.props.onSearch(e)
+      }else{
         this.setState({loading: false})
       }
-      this.setState({images: this.props.getStoreState('images')})
+
     }
     this.setState({
       loading: true
@@ -66,6 +65,11 @@ class Gallery extends Component{
           </form>
         </div>
         <div className="row gal justify-content-center">
+          {
+            (this.state.images == this.props.getStoreState('images'))
+            ? "Hi"
+            : "Bye"
+          }
           {
             (this.state.loading)
             ?<PreLoader preloaderDisplay="flex"/>
@@ -93,7 +97,8 @@ class Gallery extends Component{
                         if(this.state.imgLoaded == this.props.getStoreState('images').length){
                           this.setState({
                             loading: false,
-                            imgLoaded: 1
+                            imgLoaded: 1,
+                            images: this.props.getStoreState('images')
                           })
                           console.log('RESET');
                         }
