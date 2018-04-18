@@ -8,13 +8,15 @@ import {
 } from 'react-router-dom';
 import axios from 'axios';
 
+import {connect} from 'react-redux'
+
 //Style
 import '../css/bootstrap.css';
 import '../css/index.css';
 import '../css/icon-fonts.css'
 
 // Actions
-import {addUser, editUser, saveUser, setImages, startLoading, stopLoading, check} from '../action/actions'
+import {addUser, editUser, saveUser, setImages, startLoading, stopLoading, onLoad} from '../action/actions'
 
 //Components
 import Header from './Header';
@@ -24,6 +26,8 @@ import Company from './Company';
 import AddUser from './Add_user'
 import Gallery from './Gallery'
 
+
+let images = [{url:"nourl"}];
 class App extends Component {
   constructor(props){
     super(props);
@@ -60,29 +64,41 @@ class App extends Component {
   onSearch(e){
       axios.get(`https://api.giphy.com/v1/gifs/search?q=${e}&api_key=QJ1gAcASwZQRXeHFkC2UcwWSj8SntI0e&limit=${3*2}`)
       .then(response => {
+        this.onLoad(true);
         if(response.data.data.length == 0){
+          this.onLoad(false)
           return(
             [{images:{fixed_height:{url:'http://likesreview.wpengine.com/wp-content/uploads/2017/08/Placeholder_Graphic.jpg', title:'no response'}}}]
           )
         }else{
-          console.log(response.data.data);
+          for(let i = 0; i<response.data.data.length; i+=1){
+            images[i] = {
+              url: response.data.data[i].images.fixed_height.url,
+              title: response.data.data[i].title
+            }
+          }
           return(
-            response.data.data
+            images
           )
         }
       })
       .then(responseData => {
-        // this.store.dispatch(stopLoading());
-        this.store.dispatch(setImages(responseData));
+        if(responseData[0].url == this.getStoreState('images')[0].url){
+          console.log("EQUAL");
+          this.onLoad(false)
+        }
+          this.store.dispatch(setImages(responseData));
+          images = []
+          this.onLoad(false);
       });
   }
 
-  onCheck = (stateData) => {
-    this.store.dispatch(check({imgLoaded: stateData.imgLoaded, imagesFull: this.getStoreState('images')}));
+  onLoad = (data) => {
+      this.store.dispatch(onLoad(data))
   }
 
   render() {
-    console.log(this.store.getState());
+    // console.log(this.store.getState());
     return (
       <HashRouter>
         <Fragment>
@@ -110,7 +126,7 @@ class App extends Component {
                   return(
                     <Gallery getStoreState={this.getStoreState}
                              onSearch={(e)=>this.onSearch(e)}
-                             onCheck={this.onCheck}/>
+                             onLoad={this.onLoad}/>
                   )
                 }
             }/>
@@ -121,4 +137,22 @@ class App extends Component {
     );
   }
 }
+// Playground
+
+// const mapStateToProps = state => {
+//   return{
+//     images: state.images
+//   }
+// }
+//
+// const mapDispatchToProps = dispatch => {
+//   return{
+//     setImages: (data) => dispatch(setImages(data))
+//   }
+// }
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(Gallery)
+
 export default App;

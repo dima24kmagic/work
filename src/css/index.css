@@ -362,6 +362,8 @@ body {
     height: 30rem;
     object-position: top;
     margin-bottom: 3rem; }
+    .gal__pic[src="nourl"] {
+      display: none; }
     .gal__pic:hover {
       box-shadow: 0 1.5rem 2.5rem rgba(0, 0, 0, 0.4);
       transform: translateY(-3px); }
