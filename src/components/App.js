@@ -31,9 +31,6 @@ let images = [{url:"nourl"}];
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      test: 'wasup!'
-    }
     this.store = this.props.store;
   }
 
@@ -48,9 +45,6 @@ class App extends Component {
     stateData.index = index;
     this.store.dispatch(saveUser(stateData))
   }
-  onUserEdit = (index) => {
-    this.store.dispatch(editUser(index))
-  }
 
   //FUNC'S FOR ADD-USER Component
   onAddNewUser = (e, stateData) => {
@@ -61,14 +55,16 @@ class App extends Component {
   }
 
   // FUNC'S FOR GALLERY COMPONENT
-  onSearch(e){
-      axios.get(`https://api.giphy.com/v1/gifs/search?q=${e}&api_key=QJ1gAcASwZQRXeHFkC2UcwWSj8SntI0e&limit=${3*2}`)
+  /*onSearch(e){
+      console.log(this.getStoreState('imagesToShow'));
+      axios.get(`https://api.giphy.com/v1/gifs/search?q=${e}&api_key=QJ1gAcASwZQRXeHFkC2UcwWSj8SntI0e&limit=${this.getStoreState('imagesToShow')}`)
       .then(response => {
         this.onLoad(true);
         if(response.data.data.length == 0){
           this.onLoad(false)
+          console.log("NO RESPONSE!");
           return(
-            [{images:{fixed_height:{url:'http://likesreview.wpengine.com/wp-content/uploads/2017/08/Placeholder_Graphic.jpg', title:'no response'}}}]
+            images = [{url:'http://likesreview.wpengine.com/wp-content/uploads/2017/08/Placeholder_Graphic.jpg', title:'no response'}]
           )
         }else{
           for(let i = 0; i<response.data.data.length; i+=1){
@@ -83,16 +79,17 @@ class App extends Component {
         }
       })
       .then(responseData => {
-        if(responseData[0].url == this.getStoreState('images')[0].url){
+        console.log(responseData[responseData.length-1]);
+        console.log(this.getStoreState('images')[this.getStoreState('images').length-1]);
+        if(responseData[responseData.length-1].url == this.getStoreState('images')[this.getStoreState('images').length-1].url){
           console.log("EQUAL");
           this.onLoad(false)
         }
           this.store.dispatch(setImages(responseData));
           images = []
-          this.onLoad(false);
       });
   }
-
+  */
   onLoad = (data) => {
       this.store.dispatch(onLoad(data))
   }
@@ -108,10 +105,7 @@ class App extends Component {
             <Route exact path="/users" render={
                 ()=>{
                   return(
-                    <Users getStoreState={this.getStoreState}
-                           onSaveUserEdit={this.onSaveUserEdit}
-                           onUserEdit={this.onUserEdit}
-                           />
+                    <Users/>
                    )
                      }}/>
             <Route path="/users/add" render={
@@ -137,22 +131,5 @@ class App extends Component {
     );
   }
 }
-// Playground
-
-// const mapStateToProps = state => {
-//   return{
-//     images: state.images
-//   }
-// }
-//
-// const mapDispatchToProps = dispatch => {
-//   return{
-//     setImages: (data) => dispatch(setImages(data))
-//   }
-// }
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Gallery)
 
 export default App;

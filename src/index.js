@@ -1,13 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, combineReducers } from 'redux'
-import { Provider } from 'react-redux'
+import { Provider, connect } from 'react-redux'
 
 import {HashRouter, Route} from 'react-router-dom';
 
-import {users, images, isLoading} from './reducers/app.js'
+import {users, images, isLoading, imagesToShow} from './reducers/app.js'
 
+//Components
 import App from './components/App';
+import Gallery from './components/Gallery'
 
 // Add the reducer to your store on the `routing` key
 
@@ -41,9 +43,13 @@ const store = createStore(
   combineReducers({
     users,
     images,
-    isLoading
+    isLoading,
+    imagesToShow
   }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
+
+
+
 
 ReactDOM.render(
   <Provider store={store}>
