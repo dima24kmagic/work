@@ -39,7 +39,6 @@ class Gallery extends Component{
       this.props.onSearch(e)
     }
     this.setState({
-      preloaderDisplay: "block",
       imgDisplay: "none"
     })
     if(e.target.value == ""){
@@ -80,6 +79,7 @@ class Gallery extends Component{
 
                   <img className={"d-"+this.state.imgDisplay+" gal__pic"} src={image.url} alt={image.title}
                     onLoad={()=>{
+                      this.setState({preloaderDisplay:'block'})
                       console.log(this.props.getStoreState('images').length);
                       console.log(this.state.imgLoaded);
                       this.setState({imgLoaded: this.state.imgLoaded+1})
