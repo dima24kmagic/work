@@ -4,7 +4,6 @@ import axios from 'axios';
 
 //Components
 import PreLoader from './Preloader';
-import Images from './Images'
 
 //Actions
 import {setImages, onLoad, chngImgCount, setImgCounter} from '../action/actions'
@@ -12,7 +11,6 @@ import {setImages, onLoad, chngImgCount, setImgCounter} from '../action/actions'
 //vars
 let typingTimer;
 let doneTypingInterval = 700;
-let previousInput = "";
 let images = [{url:"nourl"}];
 class Gallery extends Component{
   /*
@@ -36,7 +34,7 @@ class Gallery extends Component{
     axios.get(`https://api.giphy.com/v1/gifs/search?q=${searchVal}&api_key=QJ1gAcASwZQRXeHFkC2UcwWSj8SntI0e&limit=${this.props.imagesToShow}`)
     .then(response => {
       this.props.onLoad(true);
-      if(response.data.data.length == 0){
+      if(response.data.data.length === 0){
         this.props.onLoad(false)
         console.log("NO RESPONSE!");
         return(
@@ -57,7 +55,7 @@ class Gallery extends Component{
     .then(responseData => {
       console.log(responseData[responseData.length-1]);
       console.log(this.props.images[this.props.images.length-1]);
-      if(this.props.images.length == 3 && responseData[responseData.length-1].url == this.props.images[this.props.images.length-1].url){
+      if(this.props.images.length === 3 && responseData[responseData.length-1].url ===   this.props.images[this.props.images.length-1].url){
         console.log("EQUAL");
         this.props.onLoad(false)
       }else{
@@ -89,10 +87,10 @@ class Gallery extends Component{
   startSearch = (e, searchVal) =>{
     console.log('START');
     e.preventDefault();
-    if(searchVal.slice(-1) == " "){
-      console.log('SPACE IS PRESSED');
-    }
-    if(this.state.prevInput == searchVal){
+    // if(searchVal.slice(-1) == " "){
+    //   console.log('SPACE IS PRESSED');
+    // }
+    if(this.state.prevInput === searchVal){
       console.log("INPUT ARE EQUAL!!!");
     }else {
       if(searchVal.slice(-1) !== " " && searchVal.slice(-1) !== ""){
@@ -144,7 +142,7 @@ class Gallery extends Component{
               <div className="col-12 col-sm-6 col-lg-4 gal__container" key={i}>
                 <img className="gal__pic" src={image.url} alt={image.title}
                   onLoad={()=>{
-                      if(this.props.images[this.props.images.length-1].title == image.title){
+                      if(this.props.images[this.props.images.length-1].title === image.title){
                         this.props.onLoad(false)
                           this.setState({imgLoaded: this.state.imgLoaded+1})
                         }else{
