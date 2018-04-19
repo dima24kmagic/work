@@ -23,18 +23,14 @@ class Gallery extends Component{
     super(props);
     this.state = {
       loading: false,
-      imgLoaded: 1,
-      input: ""
-    }
-  }
-  getInput = (e) => {
-    this.setState({
-      input: e.target.value,
       imgLoaded: 1
-    })
+    }
+
+    //REF FOR GETTING INPUT
+    this.textInput = React.createRef();
   }
+
   mySearch = (searchVal) => {
-    console.log("SEARCH VAL ----->", searchVal);
     console.log(this.props.imagesToShow);
     axios.get(`https://api.giphy.com/v1/gifs/search?q=${searchVal}&api_key=QJ1gAcASwZQRXeHFkC2UcwWSj8SntI0e&limit=${this.props.imagesToShow}`)
     .then(response => {
@@ -60,17 +56,26 @@ class Gallery extends Component{
     .then(responseData => {
       console.log(responseData[responseData.length-1]);
       console.log(this.props.images[this.props.images.length-1]);
-      if(responseData[responseData.length-1].url == this.props.images[this.props.images.length-1].url){
+      if(this.props.images.length == 3 && responseData[responseData.length-1].url == this.props.images[this.props.images.length-1].url){
         console.log("EQUAL");
         this.props.onLoad(false)
-      }
+      }else{
         this.props.setImages(responseData);
         images = []
+      }
     });
   }
+
   refreshShowImageCounter = () => {
     this.props.setImgCounter(3);
   }
+
+  onInputChange = () => {
+    this.setState({
+      imgLoaded: 1
+    })
+  }
+
   startSearch = (searchVal) =>{
     if(searchVal.slice(-1) == " "){
       console.log('SPACE IS PRESSED');
@@ -78,26 +83,25 @@ class Gallery extends Component{
     if(searchVal.slice(-1) !== " " && searchVal.slice(-1) !== ""){
       clearTimeout(typingTimer);
       typingTimer = setTimeout(() => {
-        console.log(this.state.input, searchVal);
-        // search(this.state.input);
-        this.mySearch(this.state.input)
+        this.mySearch(searchVal)
       }, doneTypingInterval);
     }
 
   }
 
   render(){
+
     return(
       <div className="gallery-layout">
         <div className="search-form">
           <form className="search-form__form" onChange={(e)=>{
               this.refreshShowImageCounter();
-              this.getInput(e);
-              this.startSearch(this.state.input);
+              this.onInputChange();
+              this.startSearch(this.textInput.current.value);
             }}
             onSubmit={(e)=>this.props.onSearch(e)}>
           <h1 className="search-form__heading">Search For</h1>
-          <input type="text" placeholder="Funny Cat's" className="search-form__input"/>
+          <input ref={this.textInput} type="text" placeholder="Funny Cat's" className="search-form__input"/>
           </form>
         </div>
         <div className="row gal justify-content-center">
@@ -126,7 +130,7 @@ class Gallery extends Component{
           })
         }
         </div>
-        <div className="u-center-text mt-4"><div className="btn btn--green" onClick={() => {this.props.chngImgCount(3); this.startSearch(this.state.input.slice(0, -1))}}>Show More</div></div>
+        <div className="u-center-text mt-4"><div className="btn btn--green" onClick={() => {this.props.chngImgCount(3); this.startSearch(this.textInput.current.value)}}>Show More</div></div>
       </div>
     )
   }
