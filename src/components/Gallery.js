@@ -79,17 +79,18 @@ class Gallery extends Component{
 
   onInputChange = () => {
     this.props.setImgCounter(3);
-    this.setState({
-      imgLoaded: 1
-    })
+    if(this.textInput.current.value === this.state.prevInput){
+      this.setState({
+        imgLoaded: 1
+      })
+    }else{
+      console.log('WHAAAAAAAAAT');
+    }
   }
 
   startSearch = (e, searchVal) =>{
     console.log('START');
     e.preventDefault();
-    // if(searchVal.slice(-1) == " "){
-    //   console.log('SPACE IS PRESSED');
-    // }
     if(this.state.prevInput === searchVal){
       console.log("INPUT ARE EQUAL!!!");
     }else {
@@ -142,6 +143,8 @@ class Gallery extends Component{
               <div className="col-12 col-sm-6 col-lg-4 gal__container" key={i}>
                 <img className="gal__pic" src={image.url} alt={image.title}
                   onLoad={()=>{
+                    //Check that image rendered title equal to last img title
+                      console.log(image.title);
                       if(this.props.images[this.props.images.length-1].title === image.title){
                         this.props.onLoad(false)
                           this.setState({imgLoaded: this.state.imgLoaded+1})
