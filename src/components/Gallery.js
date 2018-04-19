@@ -23,7 +23,8 @@ class Gallery extends Component{
     super(props);
     this.state = {
       loading: false,
-      imgLoaded: 1
+      imgLoaded: 1,
+      prevInput: ""
     }
 
     //REF FOR GETTING INPUT
@@ -54,23 +55,32 @@ class Gallery extends Component{
       }
     })
     .then(responseData => {
-      // console.log(responseData[responseData.length-1]);
-      // console.log(this.props.images[this.props.images.length-1]);
+      console.log(responseData[responseData.length-1]);
+      console.log(this.props.images[this.props.images.length-1]);
       if(this.props.images.length == 3 && responseData[responseData.length-1].url == this.props.images[this.props.images.length-1].url){
         console.log("EQUAL");
         this.props.onLoad(false)
       }else{
         this.props.setImages(responseData);
         images = []
+        console.log(
+  `
+  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  LAST ITEM OF RESPONSE DATA ${responseData[responseData.length-1].title}
+  ------------------------------
+  LAST ITEM OF STORE IMAGES ${this.props.images[this.props.images.length-1].title}
+  ------------------------------
+  LENGTH OF STORE IMAGES ARRAY ${this.props.imagesToShow}
+  ------------------------------
+  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  `
+        );
       }
     });
   }
 
-  refreshShowImageCounter = () => {
-    this.props.setImgCounter(3);
-  }
-
   onInputChange = () => {
+    this.props.setImgCounter(3);
     this.setState({
       imgLoaded: 1
     })
@@ -82,11 +92,18 @@ class Gallery extends Component{
     if(searchVal.slice(-1) == " "){
       console.log('SPACE IS PRESSED');
     }
-    if(searchVal.slice(-1) !== " " && searchVal.slice(-1) !== ""){
-      clearTimeout(typingTimer);
-      typingTimer = setTimeout(() => {
-        this.mySearch(searchVal)
-      }, doneTypingInterval);
+    if(this.state.prevInput == searchVal){
+      console.log("INPUT ARE EQUAL!!!");
+    }else {
+      if(searchVal.slice(-1) !== " " && searchVal.slice(-1) !== ""){
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(() => {
+          this.mySearch(searchVal)
+        }, doneTypingInterval);
+        this.setState({
+          prevInput: searchVal
+        });
+      }
     }
   }
 
@@ -103,7 +120,6 @@ class Gallery extends Component{
       <div className="gallery-layout">
         <div className="search-form">
           <form className="search-form__form" onChange={(e)=>{
-              this.refreshShowImageCounter();
               this.onInputChange();
               this.startSearch(e, this.textInput.current.value);
             }}
@@ -128,24 +144,6 @@ class Gallery extends Component{
               <div className="col-12 col-sm-6 col-lg-4 gal__container" key={i}>
                 <img className="gal__pic" src={image.url} alt={image.title}
                   onLoad={()=>{
-                      // console.log(this.state.imgLoaded, this.props.isLoading);
-                      // if(this.state.imgLoaded == this.props.images.length){
-                      //   this.props.onLoad(false)
-                      //   this.setState({imgLoaded: this.state.imgLoaded+1})
-                      // }else{
-                      //   this.setState({imgLoaded: this.state.imgLoaded+1})
-                      // }
-console.log(`
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-IMAGES TO RENDER FIRST URL
-----> ${this.props.images[this.props.images.length-1].title}
-----------------------------
-IMAGES ALREADY FIRST URL
---> ${image.title}
-
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-`);
                       if(this.props.images[this.props.images.length-1].title == image.title){
                         this.props.onLoad(false)
                           this.setState({imgLoaded: this.state.imgLoaded+1})
