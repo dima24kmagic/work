@@ -62,7 +62,7 @@ ReactDOM.render(
 
 //RE RENDER OUR APPLICATION ON EVERY DISPATCH
 store.subscribe(() => {
-  console.log(store.getState());
+  // console.log(store.getState());
   return(
     ReactDOM.render(
       <Provider store={store}>

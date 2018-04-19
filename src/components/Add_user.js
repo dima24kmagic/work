@@ -28,7 +28,7 @@ class Add_user extends Component {
     return(
       <div className="users__form">
         <h1 className="mb-2">Add New User!</h1>
-        <form className="form" onChange={(e)=>this.getInput(e, e.target.name)} onSubmit={(e)=>this.props.onAddNewUser(e, this.state)}>
+        <form className="form" onChange={(e)=>this.getInput(e, e.target.name)} onSubmit={(e)=>this.props.addNewUser(e, this.state)}>
           <div className="group">
             <input maxLength='40' className="group__item" type="text" id="fname" placeholder="First Name" name='name' required/>
             <label className="group__item__label" htmlFor="fname">First Name</label>

@@ -102,28 +102,9 @@ class App extends Component {
           <Header store={this.store}/>
           <div className="container">
             <Route exact path="/" component={Home}/>
-            <Route exact path="/users" render={
-                ()=>{
-                  return(
-                    <Users/>
-                   )
-                     }}/>
-            <Route path="/users/add" render={
-                ()=>{
-                  return(
-                    <AddUser onAddNewUser={this.onAddNewUser}/>
-                  )
-                }
-            }/>
-            <Route path="/gallery" render={
-                ()=>{
-                  return(
-                    <Gallery getStoreState={this.getStoreState}
-                             onSearch={(e)=>this.onSearch(e)}
-                             onLoad={this.onLoad}/>
-                  )
-                }
-            }/>
+            <Route exact path="/users" component={Users}/>
+            <Route path="/users/add" render={AddUser}/>
+            <Route path="/gallery" component={Gallery}/>
             <Route exact path="/company" component={Company}/>
           </div>
         </Fragment>

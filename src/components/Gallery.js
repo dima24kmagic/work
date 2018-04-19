@@ -54,8 +54,8 @@ class Gallery extends Component{
       }
     })
     .then(responseData => {
-      console.log(responseData[responseData.length-1]);
-      console.log(this.props.images[this.props.images.length-1]);
+      // console.log(responseData[responseData.length-1]);
+      // console.log(this.props.images[this.props.images.length-1]);
       if(this.props.images.length == 3 && responseData[responseData.length-1].url == this.props.images[this.props.images.length-1].url){
         console.log("EQUAL");
         this.props.onLoad(false)
@@ -76,7 +76,9 @@ class Gallery extends Component{
     })
   }
 
-  startSearch = (searchVal) =>{
+  startSearch = (e, searchVal) =>{
+    console.log('START');
+    e.preventDefault();
     if(searchVal.slice(-1) == " "){
       console.log('SPACE IS PRESSED');
     }
@@ -86,7 +88,13 @@ class Gallery extends Component{
         this.mySearch(searchVal)
       }, doneTypingInterval);
     }
+  }
 
+  showMore = (searchVal) => {
+      clearTimeout(typingTimer);
+      typingTimer = setTimeout(() => {
+        this.mySearch(searchVal)
+      }, doneTypingInterval);
   }
 
   render(){
@@ -97,9 +105,13 @@ class Gallery extends Component{
           <form className="search-form__form" onChange={(e)=>{
               this.refreshShowImageCounter();
               this.onInputChange();
-              this.startSearch(this.textInput.current.value);
+              this.startSearch(e, this.textInput.current.value);
             }}
-            onSubmit={(e)=>this.props.onSearch(e)}>
+            onSubmit={(e)=>{
+              doneTypingInterval = 0;
+              this.startSearch(e, this.textInput.current.value);
+              doneTypingInterval = 700;
+            }}>
           <h1 className="search-form__heading">Search For</h1>
           <input ref={this.textInput} type="text" placeholder="Funny Cat's" className="search-form__input"/>
           </form>
@@ -116,21 +128,37 @@ class Gallery extends Component{
               <div className="col-12 col-sm-6 col-lg-4 gal__container" key={i}>
                 <img className="gal__pic" src={image.url} alt={image.title}
                   onLoad={()=>{
-                      console.log(this.state.imgLoaded, this.props.isLoading);
-                      if(this.state.imgLoaded == this.props.images.length){
+                      // console.log(this.state.imgLoaded, this.props.isLoading);
+                      // if(this.state.imgLoaded == this.props.images.length){
+                      //   this.props.onLoad(false)
+                      //   this.setState({imgLoaded: this.state.imgLoaded+1})
+                      // }else{
+                      //   this.setState({imgLoaded: this.state.imgLoaded+1})
+                      // }
+console.log(`
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+IMAGES TO RENDER FIRST URL
+----> ${this.props.images[this.props.images.length-1].title}
+----------------------------
+IMAGES ALREADY FIRST URL
+--> ${image.title}
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+`);
+                      if(this.props.images[this.props.images.length-1].title == image.title){
                         this.props.onLoad(false)
-                        console.log(this.props.isLoading);
-                        this.setState({imgLoaded: this.state.imgLoaded+1})
-                      }else{
-                        this.setState({imgLoaded: this.state.imgLoaded+1})
-                      }
+                          this.setState({imgLoaded: this.state.imgLoaded+1})
+                        }else{
+                          this.setState({imgLoaded: this.state.imgLoaded+1})
+                        }
                     }}></img>
               </div>
             )
           })
         }
         </div>
-        <div className="u-center-text mt-4"><div className="btn btn--green" onClick={() => {this.props.chngImgCount(3); this.startSearch(this.textInput.current.value)}}>Show More</div></div>
+        <div className="u-center-text mt-4"><div className="btn btn--green" onClick={() => {this.props.chngImgCount(3); this.showMore(this.textInput.current.value)}}>Show More</div></div>
       </div>
     )
   }
