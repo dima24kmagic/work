@@ -354,7 +354,7 @@ body {
     transition: all .3s;
     width: 100%;
     object-fit: cover;
-    border: 4px solid rgba(0, 0, 0, 0.19);
+    border: 4px solid rgba(0, 255, 179, 0.4);
     border-radius: 4px;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4);
     cursor: pointer;
@@ -362,9 +362,11 @@ body {
     height: 30rem;
     object-position: top;
     margin-bottom: 3rem; }
+    .gal__pic[src="nourl"] {
+      display: none; }
     .gal__pic:hover {
-      box-shadow: 0 1.5rem 2.5rem rgba(0, 0, 0, 0.4);
-      transform: translateY(-3px); }
+      box-shadow: 0 2.5rem 5rem rgba(0, 0, 0, 0.4);
+      transform: translateY(-12px); }
 
 .search-form {
   display: flex;
@@ -428,9 +430,11 @@ body {
   padding: 2rem;
   z-index: 10000;
   position: absolute;
-  top: 20%;
+  bottom: 15rem;
+  position: fixed;
+  bottom: 45%;
   left: 50%;
-  transform: translate(-50%, 0%);
+  transform: translate(-50%, -30%);
   display: flex;
   justify-content: center;
   align-items: center; }

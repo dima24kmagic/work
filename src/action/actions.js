@@ -44,3 +44,15 @@ export const onLoad = (data) => {
     data: data
   }
 }
+export const chngImgCount = (data) => {
+  return{
+    type: "CHANGE_IMG_COUNT",
+    data: data
+  }
+}
+export const setImgCounter = (data) => {
+  return{
+    type: "SET_IMG_COUNTER",
+    data: data
+  }
+}

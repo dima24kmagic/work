@@ -5,8 +5,9 @@ import { Provider } from 'react-redux'
 
 import {HashRouter, Route} from 'react-router-dom';
 
-import {users, images, isLoading} from './reducers/app.js'
+import {users, images, isLoading, imagesToShow} from './reducers/app.js'
 
+//Components
 import App from './components/App';
 
 // Add the reducer to your store on the `routing` key
@@ -41,9 +42,13 @@ const store = createStore(
   combineReducers({
     users,
     images,
-    isLoading
+    isLoading,
+    imagesToShow
   }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
+
+
+
 
 ReactDOM.render(
   <Provider store={store}>
@@ -56,7 +61,7 @@ ReactDOM.render(
 
 //RE RENDER OUR APPLICATION ON EVERY DISPATCH
 store.subscribe(() => {
-  console.log(store.getState());
+  // console.log(store.getState());
   return(
     ReactDOM.render(
       <Provider store={store}>

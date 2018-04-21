@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-//components
+import {connect} from 'react-redux';
 
-// import {addUser} from '../action/actions'
-// console.log(pic1);
+import {editUser, saveUser} from '../action/actions'
 
 class Users extends Component{
   constructor(props){
@@ -28,12 +27,12 @@ class Users extends Component{
 
     return(
         <div className="users">
-          {this.props.getStoreState('users').map((user, index) => {
+          {this.props.users.map((user, index) => {
             if(user.isEditing){
               return(
-                  <form onChange={(e)=>this.getInput(e, e.target.name)} onSubmit={(e)=>this.props.onSaveUserEdit(e, index, this.state)} className='edit__form ' key={index}>
+                  <form onChange={(e)=>this.getInput(e, e.target.name)} onSubmit={(e)=>this.props.saveUserEdit(e, index, this.state)} className='edit__form ' key={index}>
                   <div className='d-flex row user__row user__row--edit flex-xs-column flex-sm-row'>
-                    <div className="edit" onClick={()=>this.props.onUserEdit(index)}><img src="https://cdn2.iconfinder.com/data/icons/picons-basic-1/57/basic1-187_floppy_save_disc-512.png" alt="floppy-img"></img></div>
+                    <div className="edit" onClick={()=>this.props.editUser(index)}><img src="https://cdn2.iconfinder.com/data/icons/picons-basic-1/57/basic1-187_floppy_save_disc-512.png" alt="floppy-img"></img></div>
 
                     <div className='col-12 photo photo--edit col-sm-4'>
                       <input type='file' name="pic"/>
@@ -59,7 +58,7 @@ class Users extends Component{
             }else{
               return(
                   <div key={index} className='d-flex row user__row flex-xs-column flex-sm-row'>
-                    <div className="edit" onClick={()=>this.props.onUserEdit(index)}><img src="https://image.flaticon.com/icons/svg/61/61456.svg" alt="pencil-img"></img></div>
+                    <div className="edit" onClick={()=>this.props.editUser(index)}><img src="https://image.flaticon.com/icons/svg/61/61456.svg" alt="pencil-img"></img></div>
                     <div className='col-12 photo col-sm-4'><img alt="user pic" src={user.pic}></img></div>
                     <div className='col-12 col-sm-8 '>
                       <div className='row'>
@@ -79,4 +78,24 @@ class Users extends Component{
   }
 }
 
-export default Users;
+const mapStateToProps = state => {
+  return{
+    users: state.users
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return{
+    editUser: (index) => dispatch(editUser(index)),
+    saveUserEdit: (e, index, stateData) => {
+      e.preventDefault();
+      stateData.index = index;
+      dispatch(saveUser(stateData))
+    }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Users);

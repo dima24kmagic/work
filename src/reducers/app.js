@@ -25,9 +25,10 @@ let initialState = {
       pic: pic2
     }
   ],
-  images: [],
+  images: [{url: "nourl"}],
   //isLoading: true/false
-  isLoading: false
+  isLoading: false,
+  imagesToShow: 3
 }
 
 export const users = (state = initialState.users, action) => {
@@ -41,7 +42,8 @@ export const users = (state = initialState.users, action) => {
     case 'SAVE_USER':
       console.log(action.data);
       state[action.data.index] = action.data;
-      return /*Object.assign([], state, state.push(savedUser));*/ state
+      state[action.data.index].isEditing = true;
+      return state
     default:
       return state
   }
@@ -50,7 +52,8 @@ export const users = (state = initialState.users, action) => {
 export const images = (state = initialState.images, action, testState = initialState.isLoading) => {
   switch (action.type) {
     case 'SET_IMAGES':
-      let newState = state = action.data;
+      let newState = action.data;
+      state = newState
       return newState
     default:
       return state
@@ -65,6 +68,17 @@ export const isLoading = (state = initialState.isLoading, action) => {
       return state = false
     case 'ON_LOAD':
       return state = action.data
+    default:
+      return state
+  }
+}
+
+export const imagesToShow = (state = initialState.imagesToShow, action) => {
+  switch (action.type) {
+    case 'CHANGE_IMG_COUNT':
+      return state + action.data
+    case 'SET_IMG_COUNTER':
+      return action.data
     default:
       return state
   }
