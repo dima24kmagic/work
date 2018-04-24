@@ -2,7 +2,11 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
+//actions
 import {editUser, saveUser, getUsers} from '../action/actions'
+
+//API
+import {deleteUser} from '../api/api'
 
 class Users extends Component{
   constructor(props){
@@ -17,12 +21,24 @@ class Users extends Component{
       "pic": ""
     }
   }
+  onDeleteUser = (id) => {
+    fetch(`http://localhost:3000/peoples/${id}`, {
+      withCredentials: true,
+      method: 'DELETE'
+    }).then((res) => {
+      return res.body
+    }).then((resData) => {
+      console.log(resData.getReader());
+      return resData
+    })
+  }
   getInput = (e, stateField) => {
     console.log(11, this.state[stateField]);
     this.setState({
       [stateField]: e.target.value
     })
   }
+
   componentDidMount() {
     fetch("http://localhost:3000/peoples")
       .then((res) => {
@@ -30,7 +46,6 @@ class Users extends Component{
       }).then((resData) => {
         this.props.getUsers(resData)
       })
-    console.log(this.props.users);
   }
   render(){
 
@@ -41,7 +56,7 @@ class Users extends Component{
               return(
                   <form onChange={(e)=>this.getInput(e, e.target.name)} onSubmit={(e)=>this.props.saveUserEdit(e, index, this.state)} className='edit__form ' key={index}>
                   <div className='d-flex row user__row user__row--edit flex-xs-column flex-sm-row'>
-                    <div className="edit" onClick={()=>this.deleteUser(user.id)}><img src="https://cdn2.iconfinder.com/data/icons/picons-basic-1/57/basic1-187_floppy_save_disc-512.png" alt="floppy-img"></img></div>
+                    <div className="edit" onClick={()=>this.onDeleteUser(user.id)}><img src="https://cdn2.iconfinder.com/data/icons/picons-basic-1/57/basic1-187_floppy_save_disc-512.png" alt="floppy-img"></img></div>
 
                     <div className='col-12 photo photo--edit col-sm-4'>
                       <input type='file' name="pic"/>
@@ -67,7 +82,7 @@ class Users extends Component{
             }else{
               return(
                   <div key={index} className='d-flex row user__row flex-xs-column flex-sm-row'>
-                    <div className="edit" onClick={()=>this.deleteUser(user.id)}><img src="https://image.flaticon.com/icons/svg/61/61456.svg" alt="pencil-img"></img></div>
+                    <div className="edit" onClick={()=> this.onDeleteUser(user.id)}><img src="https://image.flaticon.com/icons/svg/61/61456.svg" alt="pencil-img"></img></div>
                     <div className='col-12 photo col-sm-4'><img alt="user pic" src={user.pic}></img></div>
                     <div className='col-12 col-sm-8 '>
                       <div className='row'>
@@ -81,7 +96,7 @@ class Users extends Component{
               )
             }
           })}
-          <div onClick={() => this.addUser()} className='u-center-text'><Link className="btn btn--green" to="/users/add">Add user</Link></div>
+          <div className='u-center-text'><Link className="btn btn--green" to="/users/add">Add user</Link></div>
         </div>
     )
   }

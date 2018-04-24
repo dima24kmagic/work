@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 
 //Actions
 import {addUser} from '../action/actions'
-
+//API
+import {addUserFetch} from '../api/api'
 
 class Add_user extends Component {
   constructor(props){
@@ -11,12 +12,15 @@ class Add_user extends Component {
     this.state = {
       "name": "",
       "gender": true,
-      "age": "",
+      "age": 0,
       "education": "",
       "job": "",
       "havekids": true,
       "pic": ""
     }
+  }
+  onAddUser = (data) => {
+
   }
   getInput = (e, stateField) => {
     this.setState({
@@ -78,7 +82,18 @@ const mapDispatchToProps = dispatch => {
   return{
     addNewUser: (e, stateData) => {
       e.preventDefault();
-      dispatch(addUser(stateData));
+      fetch('http://localhost:3000/peoples', {
+        mode: "no-cors",
+        withCredentials: true,
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(stateData),
+      }).then((res) => {
+        console.log(res);
+      })
       e.currentTarget.reset();
     }
   }

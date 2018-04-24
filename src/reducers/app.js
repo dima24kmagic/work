@@ -1,6 +1,10 @@
 import pic1 from '../img/drake.jpg';
 import pic2 from '../img/kendrik.jpg';
 
+
+//API USAGE
+import {addUser, deleteUser} from '../api/api'
+
 let initialState = {
   users: [{}],
   images: [{url: "nourl"}],
@@ -12,8 +16,8 @@ let initialState = {
 export const users = (state = initialState.users, action) => {
   switch (action.type) {
     case 'ADD_USER':
-      let newUser = Object.assign({}, action.data);
-      return Object.assign([], state, state.push(newUser))
+      let newUsers = action.data
+      return newUsers
     case 'EDIT_USER':
       console.log(state[action.data].isEditing);
       return Object.assign([], state, state[action.data].isEditing = !state[action.data].isEditing)
@@ -24,6 +28,7 @@ export const users = (state = initialState.users, action) => {
       return state
     case 'GET_USERS':
       return action.data
+    case 'DELETE_USER':
     default:
       return state
   }
