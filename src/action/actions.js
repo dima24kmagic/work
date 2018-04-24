@@ -1,3 +1,11 @@
+
+//Users
+export const getUsers = (data) => {
+  return{
+    type: 'GET_USERS',
+    data: data
+  }
+}
 export const addUser = (data) => {
   return {
     type: 'ADD_USER',
@@ -18,7 +26,7 @@ export const saveUser = (data) => {
     data: data
   }
 }
-
+//Gallery
 export const setImages = (data) => {
   return{
     type: 'SET_IMAGES',

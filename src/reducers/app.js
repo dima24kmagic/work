@@ -1,30 +1,8 @@
-//__img
 import pic1 from '../img/drake.jpg';
 import pic2 from '../img/kendrik.jpg';
 
 let initialState = {
-  users: [
-    {
-      name: 'Pavel',
-      gender: true,
-      age: 18,
-      education: 'College',
-      job: 'Schooler',
-      havekids: false,
-      isEditing: false,
-      pic: pic1
-    },
-    {
-      name: "Dima",
-      gender: true,
-      age: 18,
-      job: 'Schooler',
-      education: 'Elementary School',
-      havekids: false,
-      isEditing: false,
-      pic: pic2
-    }
-  ],
+  users: [{}],
   images: [{url: "nourl"}],
   //isLoading: true/false
   isLoading: false,
@@ -44,6 +22,8 @@ export const users = (state = initialState.users, action) => {
       state[action.data.index] = action.data;
       state[action.data.index].isEditing = true;
       return state
+    case 'GET_USERS':
+      return action.data
     default:
       return state
   }
