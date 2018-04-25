@@ -159,8 +159,12 @@ body {
     .user__row--edit:hover {
       transform: scale(1.01); }
   .user__row .edit {
-    width: 2.5rem;
-    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid red;
+    min-width: 2.5rem;
+    min-height: 2.5rem;
     transition: background .25s;
     position: absolute;
     top: .5rem;
@@ -171,8 +175,8 @@ body {
     cursor: pointer;
     z-index: 1; }
     .user__row .edit img {
-      width: 100%;
-      height: 100%;
+      width: 2.5rem;
+      height: 2.5rem;
       object-fit: cover; }
     .user__row .edit:hover {
       background: rgba(70, 43, 158, 0); }

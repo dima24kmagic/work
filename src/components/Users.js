@@ -73,8 +73,9 @@ class Users extends Component{
                     className='edit__form '
                     key={index}>
                   <div className='d-flex row user__row user__row--edit flex-xs-column flex-sm-row'>
-                    <div className="edit" onClick={(e)=>this.props.saveUserEdit(e, index, this.state, user.id)}><img src="https://cdn2.iconfinder.com/data/icons/picons-basic-1/57/basic1-187_floppy_save_disc-512.png" alt="floppy-img"></img></div>
-
+                    <div className="edit" onClick={(e)=>this.props.saveUserEdit(e, index, this.state, user.id)}>
+                      <div onClick={()=>this.onDeleteUser(user.id)} className="criss">Delete</div>
+                      <img src="https://cdn2.iconfinder.com/data/icons/picons-basic-1/57/basic1-187_floppy_save_disc-512.png" alt="floppy-img"></img></div>
                     <div className='col-12 photo photo--edit col-sm-4'>
                       <input type='file' name="pic"/>
                       <img alt="user pic" src={`/static/media/${user.pic}`}></img>
