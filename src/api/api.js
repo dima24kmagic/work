@@ -17,15 +17,12 @@ export const deleteUser = (id) => {
       method: 'DELETE'
     })
   }
-export const updateUser = (id) => {
+export const updateUser = (id, body) => {
     console.log(id);
     fetch(`http://localhost:3000/peoples/${id}`, {
       withCredentials: true,
       method: 'PUT',
-      body: JSON.stringify({
-        firstname: 'New Name',
-        secondParam: 'New Second Name',
-      }),
+      body: JSON.stringify(body),
     })
   }
 export const addUserFetch = (data) => {

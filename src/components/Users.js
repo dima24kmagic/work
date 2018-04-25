@@ -8,6 +8,9 @@ import {editUser, saveUser, getUsers} from '../action/actions'
 //API
 import {deleteUser} from '../api/api'
 
+//TEST
+import pic1 from '../img/drake.jpg'
+console.log(pic1);
 class Users extends Component{
   constructor(props){
     super(props);
@@ -23,14 +26,21 @@ class Users extends Component{
   }
   onDeleteUser = (id) => {
     fetch(`http://localhost:3000/peoples/${id}`, {
-      withCredentials: true,
-      method: 'DELETE'
-    }).then((res) => {
-      return res.body
-    }).then((resData) => {
-      console.log(resData.getReader());
-      return resData
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }
+    }).then((r) => {
+      fetch("http://localhost:3000/peoples")
+        .then((res) => {
+          console.log(res);
+          return res.json()
+        }).then((resData) => {
+          this.props.getUsers(resData)
+        })
     })
+
   }
   getInput = (e, stateField) => {
     console.log(11, this.state[stateField]);
@@ -42,6 +52,7 @@ class Users extends Component{
   componentDidMount() {
     fetch("http://localhost:3000/peoples")
       .then((res) => {
+        console.log(res);
         return res.json()
       }).then((resData) => {
         this.props.getUsers(resData)
@@ -54,13 +65,19 @@ class Users extends Component{
           {this.props.users.map((user, index) => {
             if(user.isEditing){
               return(
-                  <form onChange={(e)=>this.getInput(e, e.target.name)} onSubmit={(e)=>this.props.saveUserEdit(e, index, this.state)} className='edit__form ' key={index}>
+                  <form onChange={(e)=>this.getInput(e, e.target.name)}
+                    onSubmit={(e)=>{
+                      this.props.saveUserEdit(e, index, this.state, user.id)
+                      console.log(user.id);
+                    }}
+                    className='edit__form '
+                    key={index}>
                   <div className='d-flex row user__row user__row--edit flex-xs-column flex-sm-row'>
-                    <div className="edit" onClick={()=>this.onDeleteUser(user.id)}><img src="https://cdn2.iconfinder.com/data/icons/picons-basic-1/57/basic1-187_floppy_save_disc-512.png" alt="floppy-img"></img></div>
+                    <div className="edit" onClick={(e)=>this.props.saveUserEdit(e, index, this.state, user.id)}><img src="https://cdn2.iconfinder.com/data/icons/picons-basic-1/57/basic1-187_floppy_save_disc-512.png" alt="floppy-img"></img></div>
 
                     <div className='col-12 photo photo--edit col-sm-4'>
                       <input type='file' name="pic"/>
-                      <img alt="user pic" src={user.pic}></img>
+                      <img alt="user pic" src={`/static/media/${user.pic}`}></img>
                     </div>
                     <div className='col-12 col-sm-8 '>
                       <div className='row'>
@@ -82,8 +99,8 @@ class Users extends Component{
             }else{
               return(
                   <div key={index} className='d-flex row user__row flex-xs-column flex-sm-row'>
-                    <div className="edit" onClick={()=> this.onDeleteUser(user.id)}><img src="https://image.flaticon.com/icons/svg/61/61456.svg" alt="pencil-img"></img></div>
-                    <div className='col-12 photo col-sm-4'><img alt="user pic" src={user.pic}></img></div>
+                    <div className="edit" onClick={()=> this.props.editUser(index)}><img src="https://image.flaticon.com/icons/svg/61/61456.svg" alt="pencil-img"></img></div>
+                    <div className='col-12 photo col-sm-4'><img alt="user pic" src={`/static/media/${user.pic}`}></img></div>
                     <div className='col-12 col-sm-8 '>
                       <div className='row'>
                         <div className='d-flex col-12 name justify-content-center justify-content-sm-start'>{user.name}
@@ -111,10 +128,18 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return{
     editUser: (index) => dispatch(editUser(index)),
-    saveUserEdit: (e, index, stateData) => {
+    saveUserEdit: (e, index, stateData, userId) => {
+      console.log(userId);
       e.preventDefault();
-      stateData.index = index;
-      dispatch(saveUser(stateData))
+      stateData.id = userId
+      fetch(`http://localhost:3000/peoples/${userId}`, {
+        withCredentials: true,
+        method: 'PUT',
+        body: JSON.stringify(stateData),
+      }).then((r) => {
+        stateData.index = index;
+        dispatch(saveUser(stateData))
+      })
     },
     getUsers: (data) => dispatch(getUsers(data))
   }

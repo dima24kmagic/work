@@ -24,7 +24,7 @@ export const users = (state = initialState.users, action) => {
     case 'SAVE_USER':
       console.log(action.data);
       state[action.data.index] = action.data;
-      state[action.data.index].isEditing = true;
+      state[action.data.index].isEditing = false;
       return state
     case 'GET_USERS':
       return action.data

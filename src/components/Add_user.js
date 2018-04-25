@@ -19,13 +19,17 @@ class Add_user extends Component {
       "pic": ""
     }
   }
-  onAddUser = (data) => {
-
-  }
   getInput = (e, stateField) => {
-    this.setState({
-      [stateField]: e.target.value
-    })
+    if(stateField == "pic"){
+      this.setState({
+        [stateField]: e.target.files[0].name
+      })
+    }else{
+      this.setState({
+        [stateField]: e.target.value
+      })
+    }
+
     console.log(this.state);
   }
   render(){
