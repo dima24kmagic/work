@@ -146,7 +146,7 @@ class Gallery extends Component{
                     //Check that image rendered title equal to last img title
                       console.log(image.title);
                       if(this.props.images[this.props.images.length-1].title === image.title){
-                        this.props.onLoad(false)
+                          this.props.onLoad(false)
                           this.setState({imgLoaded: this.state.imgLoaded+1})
                         }else{
                           this.setState({imgLoaded: this.state.imgLoaded+1})

@@ -1,13 +1,10 @@
-
+import axios from 'axios'
 export const request = () => {
-    fetch("http://localhost:3000/peoples")
-      .then((res) => {
+      axios({
+        url: "http://localhost:3000/peoples"
+      }).then((res) => {
         console.log(res);
-        return res.json()
-      }).then((resData) => {
-        console.log(resData);
-        this.setState({users: resData})
-        return resData
+        return res.data
       })
   }
 export const deleteUser = (id) => {
@@ -19,24 +16,27 @@ export const deleteUser = (id) => {
   }
 export const updateUser = (id, body) => {
     console.log(id);
-    fetch(`http://localhost:3000/peoples/${id}`, {
-      withCredentials: true,
-      method: 'PUT',
-      body: JSON.stringify(body),
+    axios({
+      method:'PUT',
+      url: `http://localhost:3000/peoples/${id}`,
+      data: body
+    }).then((res) => {
+      console.log(body);
     })
   }
 export const addUserFetch = (data) => {
-    fetch('http://localhost:3000/peoples', {
-      mode: "no-cors",
-      withCredentials: true,
-      method: 'POST',
+    axios({
+      method:'post',
       headers: {
-          Accept: 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       },
-      body: JSON.stringify(data),
+      url: "http://localhost:3000/peoples",
+      data: data
     }).then((res) => {
-      console.log();
+      console.log(res);
+      return res.data
     })
   }
 

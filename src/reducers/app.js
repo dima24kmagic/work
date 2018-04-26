@@ -27,6 +27,7 @@ export const users = (state = initialState.users, action) => {
       state[action.data.index].isEditing = false;
       return state
     case 'GET_USERS':
+      console.log(action.data);
       return action.data
     case 'DELETE_USER':
     default:

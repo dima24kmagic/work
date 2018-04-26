@@ -12,7 +12,7 @@ class Add_user extends Component {
     this.state = {
       "name": "",
       "gender": true,
-      "age": 0,
+      "age": "0",
       "education": "",
       "job": "",
       "havekids": true,
@@ -20,16 +20,9 @@ class Add_user extends Component {
     }
   }
   getInput = (e, stateField) => {
-    if(stateField == "pic"){
-      this.setState({
-        [stateField]: e.target.files[0].name
-      })
-    }else{
       this.setState({
         [stateField]: e.target.value
       })
-    }
-
     console.log(this.state);
   }
   render(){
@@ -67,7 +60,7 @@ class Add_user extends Component {
             <label className="group__item__label group__checkbox__label" htmlFor="free"><span className='outter-circle'><span className='inner-circle'></span></span><p>Free</p></label>
           </div>
           <div className="group">
-            <input maxLength='20' className="group__item" type="file" id="pic" placeholder="Profile Pic" name="pic" required/>
+            <input  className="group__item" type="text" id="pic" placeholder="Profile Pic" name="pic" required/>
             <label className="group__item__label" htmlFor="pic">Profile Pic</label>
           </div>
           <button className="btn btn--green">Add</button>
@@ -86,18 +79,7 @@ const mapDispatchToProps = dispatch => {
   return{
     addNewUser: (e, stateData) => {
       e.preventDefault();
-      fetch('http://localhost:3000/peoples', {
-        mode: "no-cors",
-        withCredentials: true,
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(stateData),
-      }).then((res) => {
-        console.log(res);
-      })
+      addUserFetch(stateData);
       e.currentTarget.reset();
     }
   }
